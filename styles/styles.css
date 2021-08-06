@@ -1,0 +1,82 @@
+html,
+body,
+article,
+section,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+font,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+caption {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  font-size: 100%;
+  vertical-align: baseline;
+  background: transparent;
+}
+body {
+  background-color: #1e1e1e;
+}
+.first-part {
+  height: 50vh;
+  background-image: url("../media/bg-top.jpg");
+  background-size: cover;
+  overflow: auto;
+}
+.second-part {
+  height: calc(100vh - 50vh);
+  background-color: white;
+}
+.temperature-city {
+  margin: calc(50vh/2) auto 0;
+  width: max-content;
+}

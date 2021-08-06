@@ -1,0 +1,124 @@
+// MARK: Reset
+
+html,
+body,
+article,
+section,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+font,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+caption {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  font-size: 100%;
+  vertical-align: baseline;
+  background: transparent;
+}
+
+// MARK: Utilities
+
+.bgc( @color ) {
+  background-color: @color;
+}
+
+.m(@side, @margin) {
+  @margin-list: {
+    @t: top;
+    @l: left;
+    @b: bottom;
+    @r: right;
+  };
+  @temp: @margin-list[ @@side];
+  margin-@{temp}: @margin;
+}
+
+.wh(@width, @height: @width) {
+  width: @width;
+  height: @height;
+}
+
+.br(@border-radius) {
+  border-radius: @border-radius;
+}
+
+// MARK: Body
+
+body {
+  .bgc(#1e1e1e);
+}
+
+// MARK: Background
+
+@first-part-height: 50vh;
+
+.first-part {
+  height: @first-part-height;
+  background-image: url("../media/bg-top.jpg");
+  background-size: cover;
+
+  overflow: auto;
+}
+
+.second-part {
+  height: calc(100vh - @first-part-height);
+  background-color: white;
+}
+
+
+// MARK: Temperature and City
+
+.temperature-city {
+  margin: calc(@first-part-height/2) auto 0;
+  width: max-content;
+}

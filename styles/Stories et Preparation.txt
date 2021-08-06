@@ -1,0 +1,44 @@
+Je veux que le site localise la position de la personne
+Je veux que le site affiche la température à la position de la personne (en degré par défaut)
+Je veux qu'il y ait une option pour changer la température (def/Farh)
+Je veux qu'on puisse avoir un menu tab, avec la pluviométrie, les températures et le temps dans la journée, les températures et le temps dans la semaine, pourquoi pas la meme dans les grandes villes autour
+  Le temps : nuageux, pluvieux, venteux, enneigé, ensoleillé, Tonnerre,
+
+
+Je veux une police qui donne de la personnalité à la température (a)
+
+
+Sur la température
+  Peut-etre un habillage (frozen, ...)
+
+À faire
+  Recherches
+      beautiful font for numbers (a)
+
+Ressources
+  Éclair en css : https://codepen.io/ste-vg/details/Gqakbo
+
+
+Idées :
+  Background avec photos du temps + transarence ( https://www.behance.net/gallery/41859283/Weather-UI-App-Screen-Free-PSD) + pluie/neige/... par dessus le texte
+  Animation de click en rapport avec le temps
+  Animation de transition pour les tabs en rapport avec le temps (fluide s'il pleut, brusque s'il y a du vent, fondant ou sur la luminosité s'il fait trèschaud, en bloquant s'il gèle, "violent" s'il y a de l'orage)
+  Au hover d'un tab, flou mélange des 2 couleurs dominantes
+  Animation de l'écran qui bouge avec le gyroscope, ou avec le curseur
+
+  Pas sur
+    Présence, suggestion, de quelque chose en rapport avec le moment de l'année (muguet, chandeleur, feuilles qui tombent, ...)
+    Esquisse de choses en rapport avec le temps (echarpe, bonnet, lunettes de soleil, ...)
+    Le temps représenté par une petite icone (comme s'il neigait dans le creux de la main) (inspiration : https://dribbble.com/shots/1837204-Waterfall?1417927770)
+    Nuage 3d ? https://dribbble.com/shots/6492343-Weather-App
+
+  Des nuages et autres éléments en neumorphism ?
+
+  Style très sympa : https://dribbble.com/shots/2550297-Weather-PSD-Freebie
+  Refaire le proejt dans un style minimalist : https://apps.apple.com/us/app/shrn/id1162684419?ls=1 (tabs minimaliste avec juste une bordure pour suggérer ? Une police pour "ta ville" (amour, confiance ?) La couleur pour le temp et la température)
+  Refaire le projet dans un style Bauhaus : https://dribbble.com/shots/10061507-Sunny-Cloudy-Rain (chercher les animations qui peuvent aller avec)
+    Bauhaus avec du minimalism ? https://dribbble.com/shots/10131851-Beginning-of-Spring-Spring-Showers-Insects-Awaken
+
+
+
+
