@@ -7,8 +7,96 @@ html(lang="en")
     title Weather
   body
     section.first-part
-      section.temperature-city
-        div.temperature 30 °C
-        div.city Angouleme
-    section.second-part
+      div.container
+        div.filtered
+        svg
+          filter(id="filter")
+            feTurbulence(type="fractalNoise" result="myTurbulence" baseFrequency=".2" numOctaves="5" seed="2")
+            feComposite(operator="in" in="myTurbulence" in2="SourceAlpha" result="myComposite")
+            feColorMatrix(in="myComposite" type="matrix" values="0   0   0   1   1 0   0   0   .3   0 0   0   0   0   0 0   0   0   100  0")
+    //-   div.cloud#cloud-back
+    //-   div.cloud#cloud-mid
+    //-   div.cloud#cloud-front
+    //-   <svg width="0" height="0">
+    //-     <filter id="filter-back">
+    //-       <feTurbulence type="fractalNoise" baseFrequency="0.012" numOctaves="4"/>
+    //-       <feDisplacementMap  in="SourceGraphic" scale="170" />
+    //-     </filter>
+    //-     <filter id="filter-mid">
+    //-       <feTurbulence type="fractalNoise" baseFrequency="0.012" numOctaves="4"/>
+    //-       <feDisplacementMap  in="SourceGraphic" scale="150" />
+    //-     </filter>
+    //-     <filter id="filter-front">
+    //-       <feTurbulence type="fractalNoise" baseFrequency="0.012" numOctaves="4"/>
+    //-       <feDisplacementMap  in="SourceGraphic" scale="100" />
+    //-     </filter>
+    //-   </svg>
+    //-   section.temperature-city
+    //-     div.temperature-city__text
+    //-       div.temperature 30 °C
+    //-       div.city Angouleme
+    //- section.second-part
+    //- section
+    //-   div.cloud-square
+    //-   <svg width="0" height="0">
+    //-     <filter id="filter">
+    //-       <feTurbulence type="fractalNoise" baseFrequency=".01" numOctaves="10" />
+    //-       <feDisplacementMap in="SourceGraphic" scale="90" />
+    //-     </filter>
+    //-   </svg>
+    //- section
+    //-   div.cloud-circle
+    //-     <svg width="0" height="0">
+    //-       <filter id="filter">
+    //-         <feTurbulence type="fractalNoise" baseFrequency=".01" numOctaves="10" />
+    //-         <feDisplacementMap in="SourceGraphic" scale="180" />
+    //-       </filter>
+    //-     </svg>
+
+
     script(type="text/javascript" src="scripts/index.js")
+
+
+    //-  <svg width="0" height="0">
+    //-     <defs>
+    //-       <filter id="filter">
+    //-         <feTurbulence type="fractalNoise" result="myTurbulence" baseFrequency=".1" numOctaves="10" seed="10" />
+    //-         <feComposite operator="in" in="myTurbulence" in2="SourceAlpha" result="myComposite"/>
+    //-         <feColorMatrix in="myComposite" type="matrix"
+    //-           values="1   0   0   1   2
+    //-                   0   0   0   .3   0
+    //-                   0   0   0   0   0
+    //-                   0   0   0   100  0" />
+    //-       </filter>
+    //-     </defs>
+    //- </svg>
+    //- <div  class="filtered">
+    //-   <p>Some Text</p>
+    //-   <svg>
+    //-     <rect x="10" y="10" width="300" height="100" />
+    //-   </svg>
+    //- </div>
+    //-   <svg xmlns="http://www.w3.org/2000/svg">
+    //-     <filter id="filter">
+    //-         <feTurbulence type="fractalNoise" baseFrequency="0.1" numOctaves="5"/>
+    //-     </filter>
+    //-     <rect width="100px" height="100px" filter="url(#filter)"/>
+    //-   </svg>
+
+
+  //-   <div class="container">
+  //-   <div  class="filtered"></div>
+  //-   <svg>
+  //-     <defs>
+  //-       <filter id="filter">
+  //-         <feTurbulence type="fractalNoise" result="myTurbulence" baseFrequency=".2" numOctaves="5" seed="2" />
+  //-         <feComposite operator="in" in="myTurbulence" in2="SourceAlpha" result="myComposite"/>
+  //-         <feColorMatrix in="myComposite" type="matrix"
+  //-           values="0   0   0   1   1
+  //-                   0   0   0   .3   0
+  //-                   0   0   0   0   0
+  //-                   0   0   0   100  0" />
+  //-       </filter>
+  //-     </defs>
+  //-   </svg>
+  //- </div>

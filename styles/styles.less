@@ -88,6 +88,10 @@ caption {
   height: @height;
 }
 
+.w(@width) {
+  width: @width;
+}
+
 .br(@border-radius) {
   border-radius: @border-radius;
 }
@@ -96,16 +100,18 @@ caption {
 
 body {
   .bgc(#1e1e1e);
+  height: 100vh;
+  padding: 50px;
+  // background: linear-gradient(165deg, #527785 0%, #7FB4C7 100%);
 }
 
 // MARK: Background
 
-@first-part-height: 50vh;
+@first-part-height: 70vh;
 
 .first-part {
   height: @first-part-height;
-  background-image: url("../media/bg-top.jpg");
-  background-size: cover;
+  // background: radial-gradient(circle at 100% 0%, #adb9d6, #5b74af 40%, #0f172b 90%, black);
 
   overflow: auto;
 }
@@ -115,10 +121,124 @@ body {
   background-color: white;
 }
 
+// MARK: Images
+
+.cloud {
+  height: 21vh;
+}
 
 // MARK: Temperature and City
+
+.temperature-city__text {
+  margin: 0 auto;
+  width: max-content;
+}
 
 .temperature-city {
   margin: calc(@first-part-height/2) auto 0;
   width: max-content;
+}
+
+.cloud {
+  width: 500px;
+  height: 275px;
+  background: #000;
+  border-radius: 50%;
+  position: absolute;
+  top: -300px;
+}
+
+@bs-x: 10px;
+@bs-y1: 300px;
+@bs-y2: calc(@bs-y1 + 30px);
+@bs-y3: calc(@bs-y1 + 40px);
+
+#cloud-back {
+  filter: url(#filter-back);
+  box-shadow: @bs-x @bs-y1 30px -20px #fff;
+}
+
+
+#cloud--black() {
+  #cloud-mid {
+    filter: url(#filter-mid);
+    box-shadow: @bs-x 305px 30px -30px rgba(158, 168, 179, .4);
+  }
+
+  #cloud-front {
+    filter: url(#filter-front);
+    box-shadow: @bs-x 330px 70px -80px rgba(0, 0, 0, .9);
+  }
+}
+
+#cloud--gray() {
+    #cloud-mid {
+      filter: url(#filter-mid);
+      box-shadow: @bs-x 330px 70px -50px rgba(158, 168, 179, .8);
+    }
+
+    #cloud-front {
+      filter: url(#filter-front);
+      box-shadow: @bs-x 340px 50px -100px rgba(0, 0, 0, 0.1);
+    }
+}
+
+#cloud--black();
+
+
+#sun() {
+  .sun {
+    width: 10vw;
+    height: 10vw;
+    border-radius: 50%;
+    background-color: orange;
+    filter: url(#filter-front--sun);
+    // box-shadow: 50px 50px 30px -30px rgba(158, 168, 179, .4);
+
+  }
+
+
+
+  .sun-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    margin: 0 auto;
+    width: 20vw;
+    height: 100%;
+  }
+}
+
+
+#sun();
+
+
+.filtered {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: red;
+  filter: url(#filter);
+  position: relative;
+  top: -1px;
+  left: -1px;
+}
+
+.container {
+  margin: 50px;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  box-shadow: 0px 0px 3px 3px #ff6c00,
+  0px 0px 3px 3px red;
+}
+
+.filtered2 {
+  filter: url(#filter2);
+}
+
+p {
+  margin: 0;
+  font-size: 100px;
 }
