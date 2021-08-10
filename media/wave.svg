@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   viewBox="0 0 1440 320"
+   version="1.1"
+   id="svg4"
+   sodipodi:docname="wave.svg"
+   inkscape:version="1.1 (c4e8f9e, 2021-05-24)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs8">
+    <linearGradient
+       inkscape:collect="always"
+       id="linearGradient844">
+      <stop
+         style="stop-color:#333333;stop-opacity:1"
+         offset="0"
+         id="stop840" />
+      <stop
+         style="stop-color:#2d2d2d;stop-opacity:1"
+         offset="1"
+         id="stop842" />
+    </linearGradient>
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient844"
+       id="linearGradient846"
+       x1="486.56076"
+       y1="61.377518"
+       x2="476.23541"
+       y2="311.85172"
+       gradientUnits="userSpaceOnUse" />
+    <filter
+       style="color-interpolation-filters:sRGB;"
+       inkscape:label="Drop Shadow"
+       id="filter2202"
+       x="-0.032032"
+       y="-0.25738222"
+       width="1.064064"
+       height="1.4175422">
+      <feFlood
+         flood-opacity="1"
+         flood-color="rgb(0,0,0)"
+         result="flood"
+         id="feFlood2192" />
+      <feComposite
+         in="flood"
+         in2="SourceGraphic"
+         operator="in"
+         result="composite1"
+         id="feComposite2194" />
+      <feGaussianBlur
+         in="composite1"
+         stdDeviation="19.2192"
+         result="blur"
+         id="feGaussianBlur2196" />
+      <feOffset
+         dx="0"
+         dy="-28"
+         result="offset"
+         id="feOffset2198" />
+      <feComposite
+         in="SourceGraphic"
+         in2="offset"
+         operator="over"
+         result="composite2"
+         id="feComposite2200" />
+    </filter>
+  </defs>
+  <sodipodi:namedview
+     id="namedview6"
+     pagecolor="#ffffff"
+     bordercolor="#999999"
+     borderopacity="1"
+     inkscape:pageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="0"
+     showgrid="false"
+     inkscape:zoom="0.4356909"
+     inkscape:cx="655.28107"
+     inkscape:cy="140.00751"
+     inkscape:window-width="1920"
+     inkscape:window-height="1080"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="svg4"
+     units="mm"
+     height="91.91461mm"
+     width="381.1001mm"
+     viewbox-width="1496.9397" />
+  <path
+     fill="#3b6db5"
+     fill-opacity="1"
+     d="M 0,192 48,176 C 96,160 192,120.08164 288,93.381644 351.06827,76.103565 414.13655,60.681357 477.20482,55.252709 510.13655,52.418086 543.06827,52.308217 576,56.081644 672,67.081644 768,117 864,144 c 96,27 192,37 288,16 96,-21 192,-75 240,-101.3 L 1440,32 V 320 H 1392 1152 864 576 288 48 0 Z"
+     id="path2"
+     style="fill:url(#linearGradient846);fill-opacity:1;filter:url(#filter2202)"
+     sodipodi:nodetypes="cscssssccccccccccc" />
+</svg>

@@ -7,34 +7,49 @@ html(lang="en")
     title Weather
   body
     section.first-part
-      div.container
-        div.filtered
-        svg
+      section.sun-container
+        div.sun
+        svg(width="0" height="0")
           filter(id="filter")
             feTurbulence(type="fractalNoise" result="myTurbulence" baseFrequency=".2" numOctaves="5" seed="2")
             feComposite(operator="in" in="myTurbulence" in2="SourceAlpha" result="myComposite")
-            feColorMatrix(in="myComposite" type="matrix" values="0   0   0   1   1 0   0   0   .3   0 0   0   0   0   0 0   0   0   100  0")
-    //-   div.cloud#cloud-back
-    //-   div.cloud#cloud-mid
-    //-   div.cloud#cloud-front
-    //-   <svg width="0" height="0">
-    //-     <filter id="filter-back">
-    //-       <feTurbulence type="fractalNoise" baseFrequency="0.012" numOctaves="4"/>
-    //-       <feDisplacementMap  in="SourceGraphic" scale="170" />
-    //-     </filter>
-    //-     <filter id="filter-mid">
-    //-       <feTurbulence type="fractalNoise" baseFrequency="0.012" numOctaves="4"/>
-    //-       <feDisplacementMap  in="SourceGraphic" scale="150" />
-    //-     </filter>
-    //-     <filter id="filter-front">
-    //-       <feTurbulence type="fractalNoise" baseFrequency="0.012" numOctaves="4"/>
-    //-       <feDisplacementMap  in="SourceGraphic" scale="100" />
-    //-     </filter>
-    //-   </svg>
-    //-   section.temperature-city
-    //-     div.temperature-city__text
-    //-       div.temperature 30 °C
-    //-       div.city Angouleme
+            feColorMatrix(in="myComposite" type="matrix" values="0   0   0   1   1 0   0   0   .25   0 0   0   0   0   0 0   0   0   100  0")
+      section.temperature-city
+        div.temperature-city__text.ff--BGL
+          div.temperature-container
+          div.city Angouleme
+          div.weather Ensoleillé
+    section.second-part
+      section.week
+        section.week__weathers.ff--JSR
+        section.week__temperatures
+
+      //- div.div--grayscale
+        svg(width="0" height="0")
+          filter(id="filter--grayscale")
+            feTurbulence(type="fractalNoise" result="myTurbulence2" baseFrequency=".2" numOctaves="5" seed="2")
+        svg
+          filter(id="filter--grayscale")
+            feTurbulence(type="fractalNoise" result="myTurbulence2" baseFrequency=".2" numOctaves="5" seed="2")
+      //- div.cloud#cloud-back
+      //- div.cloud#cloud-mid
+      //- div.cloud#cloud-front
+      //- <svg width="0" height="0">
+      //-   <filter id="filter-back">
+      //-     <feTurbulence type="fractalNoise" baseFrequency="0.012" numOctaves="4"/>
+      //-     <feDisplacementMap  in="SourceGraphic" scale="170" />
+      //-   </filter>
+      //-   <filter id="filter-mid">
+      //-     <feTurbulence type="fractalNoise" baseFrequency="0.012" numOctaves="4"/>
+      //-     <feDisplacementMap  in="SourceGraphic" scale="150" />
+      //-   </filter>
+      //-   <filter id="filter-front">
+      //-     <feTurbulence type="fractalNoise" baseFrequency="0.012" numOctaves="4"/>
+      //-     <feDisplacementMap  in="SourceGraphic" scale="100" />
+      //-   </filter>
+      //- </svg>
+
+
     //- section.second-part
     //- section
     //-   div.cloud-square

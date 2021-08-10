@@ -96,13 +96,17 @@ caption {
   border-radius: @border-radius;
 }
 
+.half-circle(@width) {
+  .wh(@width, (@width / 2));
+  border-bottom-left-radius: 50%  100%;
+  border-bottom-right-radius: 50%  100%;
+}
+
 // MARK: Body
 
 body {
-  .bgc(#1e1e1e);
+  // .bgc(#1e1e1e);
   height: 100vh;
-  padding: 50px;
-  // background: linear-gradient(165deg, #527785 0%, #7FB4C7 100%);
 }
 
 // MARK: Background
@@ -110,22 +114,72 @@ body {
 @first-part-height: 70vh;
 
 .first-part {
-  height: @first-part-height;
-  // background: radial-gradient(circle at 100% 0%, #adb9d6, #5b74af 40%, #0f172b 90%, black);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
 
-  overflow: auto;
+  height: @first-part-height;
+
+  background: radial-gradient(circle at 100% 0%, #adb9d6, #5b74af 40%, #0f172b 90%, black);
+  background: radial-gradient(circle at 50% -10%, white , #92f4fd 30%, #3b6db5);
+  padding-bottom: 8.75vh;
+  box-sizing: border-box;
 }
 
 .second-part {
+  margin-top: -5%;
+  padding-bottom: 6%;
   height: calc(100vh - @first-part-height);
-  background-color: white;
+  background: linear-gradient(#4176ba, #92f4fd);
+  // box-shadow: 0px 0px 50px 5px black;
+}
+
+
+
+
+// .second-part::before {
+//   content: '';
+
+//   display: block;
+//   position: relative;
+//   left: 50%;
+
+//   .half-circle(50%);
+//   background-color: white;
+// }
+
+// .second-part::after {
+//   content: '';
+
+//   display: block;
+//   position: relative;
+//   top: -50%;
+
+//   .wh(50%, 25%);
+//   border-top-left-radius: 50%  100%;
+//   border-top-right-radius: 50%  100%;
+//   background-color: white;
+// }
+
+.second-part::before {
+  content: '';
+  background-image: url(../media/wave.svg);
+  background-size: cover;
+  fill: #3b6db5;
+
+  display: block;
+  position: absolute;
+  top: -25%;
+  width: 100%;
+  height: 25%;
 }
 
 // MARK: Images
 
-.cloud {
-  height: 21vh;
-}
+// .cloud {
+//   height: 21vh;
+// }
 
 // MARK: Temperature and City
 
@@ -135,110 +189,384 @@ body {
 }
 
 .temperature-city {
-  margin: calc(@first-part-height/2) auto 0;
+  // margin: calc(@first-part-height/2) auto 0;
   width: max-content;
 }
 
-.cloud {
-  width: 500px;
-  height: 275px;
-  background: #000;
-  border-radius: 50%;
-  position: absolute;
-  top: -300px;
+.city {
+  font-size: 1.5rem;
+  color: #666;
 }
 
-@bs-x: 10px;
-@bs-y1: 300px;
-@bs-y2: calc(@bs-y1 + 30px);
-@bs-y3: calc(@bs-y1 + 40px);
+.weather {
+  font-size: 1.8rem;
+}
 
-#cloud-back {
-  filter: url(#filter-back);
-  box-shadow: @bs-x @bs-y1 30px -20px #fff;
+* {
+  // background: rgba(0, 0,0, 0) !important;
+}
+
+// @cloud-w: 500px;
+// @cloud-h: 275px;
+
+// @cloud-w: 400px;
+// @cloud-h: 220px;
+
+// @cloud-w: 250px;
+// @cloud-h: 137px;
+
+// @cloud-w: 125px;
+// @cloud-h: 68px;
+
+// @cloud-w: 50px;
+// @cloud-h: 27.5px;
+
+// @bs-x: calc(@cloud-w * .02);
+// @bs-y1: calc(@cloud-h * 1.03);
+// @bs-blur-back: calc(@cloud-h /  9.167);
+// @bs-spread-back: calc(-1 * (@cloud-h /  13.75));
+
+// @bs-y-mid: calc(@cloud-h * 1.04);
+// @bs-y-front: calc(@cloud-h * 1.09);
+// @bs-blur-front: calc(@cloud-h /  3.92857);
+// @bs-spread-front: calc(-1 * (@cloud-h /  3.4375));
+// @bs-blur-mid: calc(@cloud-h /  9.167);
+// @bs-spread-mid: calc(-1 * (@cloud-h /  9.167));
+
+// .cloud {
+//   width: @cloud-w;
+//   height: @cloud-h;
+//   // .wh(100%);
+//   background: #000;
+//   border-radius: 50%;
+//   position: absolute;
+//   top: -100px;
+//   position: absolute;
+//   top: 0px;
+//   left: 0px;
+//   background-color: rgba(0, 0,0, 0);
+// }
+
+// @bs-x: 10px;
+// @bs-y1: calc(@cloud-h + 15px);
+// @bs-blur-back: calc(@cloud-h /  9.167);
+// @bs-spread-back: calc(-1 * (@cloud-h /  13.75));
+
+// #cloud-back {
+//   filter: url(#filter-back);
+//   box-shadow: @bs-x @bs-y1 @bs-blur-back @bs-spread-back #fff;
+// }
+
+#cloud--mini() {
+
+  .cloud {
+    // position: relative;
+    // top: -19px;
+    // left: -1px;
+
+    width: 40px;
+    height: 23.5px;
+    background: #000;
+    border-radius: 50%;
+    background-color: rgba(0, 0,0, 0);
+  }
+
+  #cloud-back {
+    filter: url(#filter-back);
+    // box-shadow: @bs-x @bs-y1 @bs-blur-back @bs-spread-back #fff;
+    box-shadow: rgb(255, 255, 255) 68px 31.325px 2px -3px;
+    box-shadow: #000 0 31.325px 3px -10px,  0 31.325px 4px -6px #9ea8b3, #fff 0 31.325px 2px -3px;
+  }
 }
 
 
 #cloud--black() {
+  @bs-y-mid: calc(@bs-y1 + 5px);
+  @bs-y-front: calc(@bs-y1 + 30px);
+  @bs-blur-front: calc(@cloud-h /  3.92857);
+  @bs-spread-front: calc(-1 * (@cloud-h /  3.4375));
+  @bs-blur-mid: calc(@cloud-h /  9.167);
+  @bs-spread-mid: calc(-1 * (@cloud-h /  9.167));
+
   #cloud-mid {
     filter: url(#filter-mid);
-    box-shadow: @bs-x 305px 30px -30px rgba(158, 168, 179, .4);
+    box-shadow: @bs-x @bs-y-mid @bs-blur-mid @bs-spread-mid rgba(158, 168, 179, .4);
   }
 
   #cloud-front {
     filter: url(#filter-front);
-    box-shadow: @bs-x 330px 70px -80px rgba(0, 0, 0, .9);
+    box-shadow: @bs-x @bs-y-front @bs-blur-front @bs-spread-front rgba(0, 0, 0, .9);
   }
 }
 
 #cloud--gray() {
-    #cloud-mid {
-      filter: url(#filter-mid);
-      box-shadow: @bs-x 330px 70px -50px rgba(158, 168, 179, .8);
-    }
+  @bs-y2: calc(@bs-y1 + 30px);
+  @bs-y3: calc(@bs-y1 + 40px);
 
-    #cloud-front {
-      filter: url(#filter-front);
-      box-shadow: @bs-x 340px 50px -100px rgba(0, 0, 0, 0.1);
-    }
-}
-
-#cloud--black();
-
-
-#sun() {
-  .sun {
-    width: 10vw;
-    height: 10vw;
-    border-radius: 50%;
-    background-color: orange;
-    filter: url(#filter-front--sun);
-    // box-shadow: 50px 50px 30px -30px rgba(158, 168, 179, .4);
-
+  #cloud-mid {
+    filter: url(#filter-mid);
+    box-shadow: @bs-x @bs-y2 70px -50px rgba(158, 168, 179, .8);
   }
 
-
-
-  .sun-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    margin: 0 auto;
-    width: 20vw;
-    height: 100%;
+  #cloud-front {
+    filter: url(#filter-front);
+    box-shadow: @bs-x @bs-y3 50px -100px rgba(0, 0, 0, 0.1);
   }
 }
 
+// #cloud--black();
+#cloud--mini();
 
-#sun();
+
+// #sun() {
+//   .sun {
+//     width: 10vw;
+//     height: 10vw;
+//     border-radius: 50%;
+//     background-color: orange;
+//     filter: url(#filter-front--sun);
+//     // box-shadow: 50px 50px 30px -30px rgba(158, 168, 179, .4);
+
+//   }
 
 
-.filtered {
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  background-color: red;
-  filter: url(#filter);
+
+//   .sun-container {
+//     display: flex;
+//     justify-content: center;
+//     align-items: center;
+
+//     margin: 0 auto;
+//     width: 20vw;
+//     height: 100%;
+//   }
+// }
+
+@sun-size: 125px;
+@sun-container-size: calc(@sun-size - 2px);
+
+.sun {
   position: relative;
   top: -1px;
   left: -1px;
+
+  border-radius: 50%;
+  .wh(@sun-size);
+
+  background-color: red;
+  filter: url(#filter);
 }
 
-.container {
-  margin: 50px;
-  width: 48px;
-  height: 48px;
+.sun-container {
+  margin: 20px;
   border-radius: 50%;
-  box-shadow: 0px 0px 3px 3px #ff6c00,
-  0px 0px 3px 3px red;
+  .wh(@sun-container-size);
+  // box-shadow: 0 0 1px 1px #ff1600, 0 0 1px 4px #ff6a00;
+  box-shadow: 0 0 14px 5px #ff1600, 0 0 20px 4px yellow;
 }
 
 .filtered2 {
   filter: url(#filter2);
 }
 
+.temperature-container {
+  display: flex;
+  justify-content: center;
+
+  font-size: 2rem;
+}
+
+.temperature {
+  display: inline-block;
+}
+
 p {
   margin: 0;
   font-size: 100px;
 }
+
+@font-face {
+  font-family: 'Bank Gothic Light';
+  src: url('../fonts/Bank\ Gothic\ Light\ Regular.otf');
+}
+
+@font-face {
+  font-family: 'Bank Gothic Medium';
+  src: url('../fonts/Bank\ Gothic\ Medium.otf');
+}
+
+.ff--BGM {
+  font-family: 'Bank Gothic Medium';
+}
+
+@font-face {
+  font-family: 'Bank Gothic DB Regular';
+  src: url('../fonts/BankGothic\ DB\ Regular.ttf');
+}
+
+.ff--BGDBR {
+  font-family: 'Bank Gothic DB Regular';
+}
+
+@font-face {
+  font-family: 'Josef Normal';
+  src: url('../fonts/Josef Normal.ttf');
+}
+
+.ff--JN {
+  font-family: 'Josef Normal';
+}
+
+
+@font-face {
+  font-family: 'Josef Sans Regular';
+  src: url('../fonts/Josefin Sans Regular.ttf');
+}
+
+.ff--JSR {
+  font-family: 'Josef Sans Regular';
+  color: white;
+}
+
+@font-face {
+  font-family: 'Neo Latina';
+  src: url('../fonts/neo-latina-demo-FFP.ttf');
+}
+
+.ff--NL {
+  font-family: 'Neo Latina';
+}
+
+@font-face {
+  font-family: 'TapeGun';
+  src: url('../fonts/TapeGun.ttf');
+}
+
+.ff--TG {
+  font-family: 'TapeGun';
+}
+
+
+.ff--BGL {
+  font-family: 'Bank Gothic Light';
+}
+
+.first-part {
+  background: black;
+  background: linear-gradient(black 80%, #222); //TODO: Tester du radial-gradient
+  color: white;
+}
+
+.second-part {
+  position: relative;
+
+  background: black;
+  background: linear-gradient(#000, #333); //Inverser pour voir si je peux passer une box-shadow
+  background: linear-gradient(#303030, #000);
+}
+
+.temperature-container {
+  font-size: 4.5rem;
+}
+
+.city {
+  width: max-content;
+  font-size: 1rem;
+}
+
+
+
+// padding-top: 50%;
+
+.temperature-city__text {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+
+// MARK: Week (Second Part)
+
+.week {
+  display: flex;
+  justify-content: center;
+  margin: 0 auto;
+}
+
+.week__days, .week__weathers, .week__temperatures {
+  display: flex;
+  justify-content: space-around;
+}
+
+.week__weathers {
+  flex-wrap: wrap;
+
+  width: 70%;
+}
+
+.week__days {
+  color: white;
+}
+
+.weather-miniature {
+  // display: flex;
+  // flex-direction: column;
+
+  // .wh(64px, 66px);
+  .br(50%);
+  margin-top: -5px;
+  margin-bottom: 20px;
+}
+
+.weather-miniature__vcontainer {
+  width: 45px;
+  height: 45px;
+  background-color: black;
+  border-radius: 50%;
+  margin-top: -22px;
+  margin-left: -4px;
+  background: linear-gradient(-45deg, #303030, #000);
+  box-shadow: 3px 2px 1px 0px black, -1px 4px 1px 0px black, -1px -3px 3px -2px white, -3px -1px 2px -2px white;
+}
+
+
+.en-cours() {
+  .week {
+    height: 100%;
+  }
+
+  .week__weathers-and-days {
+    margin: 12px 14px;
+  }
+
+  .week__weathers {
+    text-align: center;
+    width: 80%;
+    height: 100%;
+    align-items: center;
+  }
+
+  .weather-miniature {
+    // margin-top: 12px;
+    margin-top: -7px;
+    margin-bottom: 0;
+    position: relative;
+  }
+
+  .weather-miniature__vcontainer {
+    margin-top: 0px;
+    margin-left: 0px;
+  }
+
+  .cloud {
+    position: absolute;
+    left: 3px;
+  }
+}
+
+.en-cours();
+
+
+
+// TODO: Refacto
+  // TODO: Retirer les ff--

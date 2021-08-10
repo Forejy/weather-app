@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   viewBox="0 0 1440 320"
+   version="1.1"
+   id="svg4"
+   sodipodi:docname="wave.svg"
+   inkscape:version="1.1 (c4e8f9e, 2021-05-24)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs8">
+    <linearGradient
+       inkscape:collect="always"
+       id="linearGradient844">
+      <stop
+         style="stop-color:#333333;stop-opacity:1"
+         offset="0"
+         id="stop840" />
+      <stop
+         style="stop-color:#2e2e2e;stop-opacity:1"
+         offset="1"
+         id="stop842" />
+    </linearGradient>
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient844"
+       id="linearGradient846"
+       x1="486.56076"
+       y1="61.377518"
+       x2="476.23544"
+       y2="321.03253"
+       gradientUnits="userSpaceOnUse" />
+  </defs>
+  <sodipodi:namedview
+     id="namedview6"
+     pagecolor="#ffffff"
+     bordercolor="#999999"
+     borderopacity="1"
+     inkscape:pageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="0"
+     showgrid="false"
+     inkscape:zoom="0.48345638"
+     inkscape:cx="528.48615"
+     inkscape:cy="304.06053"
+     inkscape:window-width="1920"
+     inkscape:window-height="1058"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="svg4"
+     units="mm"
+     height="91.91461mm"
+     width="381.1001mm"
+     viewbox-width="1496.9397" />
+  <path
+     fill="#3b6db5"
+     fill-opacity="1"
+     d="M 0,192 48,176 C 96,160 192,128 288,101.3 351.06827,84.021921 414.13655,68.599713 477.20482,63.171065 510.13655,60.336442 543.06827,60.226573 576,64 c 96,11 192,53 288,80 96,27 192,37 288,16 96,-21 192,-75 240,-101.3 L 1440,32 V 320 H 1392 1152 864 576 288 48 0 Z"
+     id="path2"
+     style="fill:url(#linearGradient846);fill-opacity:1"
+     sodipodi:nodetypes="cscssssccccccccccc" />
+</svg>
