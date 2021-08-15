@@ -1,4 +1,4 @@
-function cloud(size) {
+  function cloud(size) {
   const scale = [2.94117647059, 3.333, 5];
   // let calcScale = [size/scale[0], size/scale[1], size/scale[2]];
   let baseFrequency = 0.04;
@@ -85,7 +85,6 @@ function appendDaysToWeek() {
 
   function appendTemperatures() {
     let week_temperatures = document.getElementsByClassName("week__temperatures")[0];
-
   }
 
   appendWeathers();
@@ -97,13 +96,63 @@ appendDaysToWeek();
 
 function changeDayOrWeek() {
   const switchContainer = document.getElementById("js-switch-subcontainer");
+  let opacity = 0;
+  let transfer = ["0px", "3px"]
+
   switchContainer.addEventListener("click", function(){
+    // Switch Button
+    switchContainer.style.paddingLeft = transfer[opacity];
+    opacity = opacity === 0 ? 1 : 0;
+    switchContainer.style.paddingRight = transfer[opacity]
+    switchContainer.style.setProperty('--switch-b--opacity', opacity);
+
     let informations = document.getElementById("informations").children;
     let words = document.getElementsByClassName("day-week__text__words");
     for(let i = 0; i < 2; i++) {
       words[i].classList.toggle("text-white");
-      informations[i].classList.toggle("d-none");
     }
+    // Transition 1
+    informations[0].classList.remove("d-none");
+    informations[1].classList.add("translateX-100notrans");
+
+    // setTimeout(function () {
+      // informations[0].classList.remove("translateX-100");
+      // informations[1].classList.remove("translateX-100notrans");
+    // }
+    // , 2000);
+
+    // setTimeout(function () {
+    //   informations[0].classList.remove("translateX-100");
+    // }
+    // , 2500);
+
+    // setTimeout(function () {
+    //   informations[1].classList.add("d-none");
+    //   informations[1].classList.add("translateX-173");
+    // }
+    // , 2000);
+
+
+
+
+    // setTimeout(function () {
+
+
+
+    //   informations[0].classList.remove("translateX100");
+    //   informations[0].classList.remove("d-none");
+    // }
+    // , 10);
+    // setTimeout(function () {
+    //   informations[0].classList.remove("translateX-100")
+    //   informations[1].classList.add("translateX100");
+    // }
+    // , 100);
+    // setTimeout(function () {
+    //   informations[1].classList.add("d-none");
+    // }
+    // , 3000);
+
   })
 }
 
@@ -120,10 +169,12 @@ function dayTemperatures() {
   const dayTemperatures = [25, 30, 30, 26, 25, 30, 25, 35, 30];
   const max = Math.max(...dayTemperatures);
   const range = max - Math.min(...dayTemperatures);
-  const wContainer = document.getElementById("informations").clientWidth;
-  let hContainer = document.getElementById("informations").clientHeight - parseInt(window.getComputedStyle(containerTemperatureText).lineHeight) - parseInt(window.getComputedStyle(containerHours).lineHeight) - parseInt(window.getComputedStyle(containerHours).marginTop);
+  const tempTextDecalage = 3;
+  const containerBig = document.getElementById("informations");
+  const wContainer = containerBig.clientWidth - parseInt(window.getComputedStyle(containerBig).paddingLeft) - parseInt(window.getComputedStyle(containerBig).paddingRight);
+  let hContainer = containerBig.clientHeight - (parseInt(window.getComputedStyle(containerTemperatureText).lineHeight) + tempTextDecalage) - parseInt(window.getComputedStyle(containerHours).lineHeight) - parseInt(window.getComputedStyle(containerHours).marginTop);
   containerGraphic.style.height = hContainer + "px";
-  const wPart = (wContainer / (dayTemperatures.length - 1)) - 1;
+  const wPart = (wContainer / ((dayTemperatures.length - 1))); //-1 parce que j'affiche les temperatures par 2 consécutivement;
   const hPart = hContainer / range;
 
   let tempStr = "";
@@ -147,14 +198,14 @@ function dayTemperatures() {
     tempStr += svgPart + path;
 
     // Create Text
-    elem.style.top = (y1 - 3) + "px";
+    elem.style.top = (y1) + "px";
     elem.innerText = dayTemperatures[i - 2] !== dayTemperatures[i - 1] ?dayTemperatures[i - 1] + "°" : "";
     fragment.appendChild(elem);
     elem = elem.cloneNode();
 
     y1 = y2; // (Pour les deux)
   }
-  elem.style.top = (y1 - 3) + "px";
+  elem.style.top = (y1) + "px";
   elem.innerText = dayTemperatures[dayTemperatures.length - 1] + "°";
   fragment.appendChild(elem);
 

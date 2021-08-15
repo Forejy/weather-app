@@ -116,6 +116,23 @@ caption {
   .d-none {
     display: none;
   }
+
+  .translateX-173 {
+    transform: translateX(-173%);
+  }
+
+  .translate-X-day-temperatures {
+    transform: translateX(calc(-100% - var(--lpadding) - var(--rpadding)));
+  }
+
+  .translateX-100notrans {
+    transform: translateX(-100%);
+    transition: none !important;
+  }
+
+  .translateX100 {
+    transform: translateX(110%);
+  }
 }
 
 // MARK: Body
@@ -464,6 +481,8 @@ p {
 
 #informations {
   margin: 0 auto;
+  padding-right: var(--rpadding);
+  padding-left: var(--lpadding);
   width: 80%;
   height: 51.28%;
 }
@@ -479,9 +498,13 @@ p {
 
 .week {
   display: flex;
+  height: 100%;
+  align-items: end;
 
   text-align: center;
   overflow-x: scroll;
+
+  width: 315px;
 }
 
 .week__weathers-and-days {
@@ -513,7 +536,6 @@ p {
   margin: 7px 0 12px;
   .wh(40px);
   border-radius: 50%;
-  day-temperatures__hours
   background-color: black;
   background: linear-gradient(-45deg, #303030, #000);
   box-shadow: 3px 2px 1px 0px black, -1px 4px 1px 0px black, -1px -3px 3px -2px white, -3px -1px 2px -2px white;
@@ -523,9 +545,9 @@ p {
   display: flex;
 
   position: relative;
-  left: -8px;
+  left: -10px;
 
-  margin-top: 5px;
+  margin-top: 8px;
 
   color: #aaa;
   line-height: 1em;
@@ -549,14 +571,11 @@ p {
     border-bottom-right-radius: 50% 100%;
     height: 25px;
     width: (1.145 * 2 * @switch-width);
-    padding: 1px 2px 2px 3px;
 
     background: linear-gradient(90deg, #333, #eee 50%, #eee 55%, #333);
     background: #eee;
 
     height: 26px;
-    padding: 0;
-    padding-left: 3px;
   }
 
 
@@ -569,6 +588,8 @@ p {
     cursor: pointer;
 
     height: 18px;
+
+
   }
 
   .switch-lpart {
@@ -594,31 +615,76 @@ p {
     box-shadow: inset -(@switch-width * .3) 0px (@switch-width * .15) -(@switch-width * .1) #1F1F1F;
   }
 
+  .switch-lpart:before {
+    content: '';
+    display: block;
+
+    margin-right: 0;
+    height: 100%;
+
+    border-top-left-radius: 40% 50%;
+    border-bottom-left-radius: 40% 50%;
+
+    background: linear-gradient(-90deg, #ccc 10%, #999);
+
+    box-shadow: inset (@switch-width * .3) 0px (@switch-width * .15) -(@switch-width * .1) #1F1F1F, -5px 0px 1px 0 white;
+
+    opacity: var(--switch-b--opacity);
+  }
+
+  .switch-rpart:before {
+    content: '';
+    display: block;
+
+    height: 100%;
+
+    border-top-right-radius: 40% 50%;
+    border-bottom-right-radius: 40% 50%;
+
+    background: linear-gradient(-90deg, #ddd 40%, #ccc 90%);
+    box-shadow: 5px 0px 1px -2px black;
+
+
+    opacity: var(--switch-b--opacity);
+  }
+}
+
+.switch-subcontainer {
+  --switch-b--opacity: 0;
+
+  display: flex;
+
+  padding-left: 3px;
+}
+
   .en-cours() {
-    // .switch-container {
-    //   padding-right: 3px;
-    // }
 
-    .switch-lpart:hover {
-      margin-right: 0;
-      background: linear-gradient(-90deg, #ccc 10%, #999);
-
-      box-shadow: inset (@switch-width * .3) 0px (@switch-width * .15) -(@switch-width * .1) #1F1F1F;
-      transition: box-shadow 100s linear;
-    }
-
-    // .switch-rpart{
-    //   margin-left: -2px;
-    //   background: linear-gradient(-90deg, #ddd 40%, #ccc 90%);
-    //   box-shadow: 5px 0px 1px -2px black;
-
-    //   transition: background 2s;
-    // }
-
+  .week {
+    transform: translateX(0%);
+    transition: 2s;
   }
-  .switch-subcontainer {
-    display: flex;
-  }
+
+ .day-temperatures {
+    width: 100%;
+
+    transform: translateX(0%);
+    transition: 2s;
+ }
+
+ #informations {
+   display: flex;
+   overflow: scroll;
+
+   --lpadding: 10px;
+   --rpadding: 12px;
+ }
+
+ .week {
+  flex-shrink: 0;
+
+  width: 100%;
+ }
+
 }
 
 .switch();
@@ -647,7 +713,8 @@ p {
   position: relative;
 }
 
+.en-cours();
 
 .utilities();
 
-.en-cours();
+
