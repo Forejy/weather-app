@@ -484,7 +484,8 @@ p {
   padding-right: var(--rpadding);
   padding-left: var(--lpadding);
   width: 80%;
-  height: 51.28%;
+  // height: 51.28%;
+  height: 16.4096vh;
 }
 
 .day-temperatures__text {
@@ -535,10 +536,17 @@ p {
 
   margin: 7px 0 12px;
   .wh(40px);
+  .wh(11.1111111104vw);
   border-radius: 50%;
   background-color: black;
   background: linear-gradient(-45deg, #303030, #000);
   box-shadow: 3px 2px 1px 0px black, -1px 4px 1px 0px black, -1px -3px 3px -2px white, -3px -1px 2px -2px white;
+}
+
+@media (min-aspect-ratio: 10001/10000) {
+  .weather-miniature__vcontainer {
+    background: blue;
+  }
 }
 
 .day-temperatures__hours {
@@ -659,31 +667,49 @@ p {
 
   .en-cours() {
 
-  .week {
-    transform: translateX(0%);
-    transition: 2s;
-  }
+    .transition() {
 
- .day-temperatures {
-    width: 100%;
+      .week {
+        transform: translateX(0%);
+        transition: 2s;
+      }
 
-    transform: translateX(0%);
-    transition: 2s;
- }
+     .day-temperatures {
+        width: 100%;
 
- #informations {
-   display: flex;
-   overflow: scroll;
+        transform: translateX(0%);
+        transition: 2s;
+     }
 
-   --lpadding: 10px;
-   --rpadding: 12px;
- }
+     #informations {
+       --lpadding: 10px;
+       --rpadding: 12px;
 
- .week {
-  flex-shrink: 0;
+       display: flex;
+       overflow: scroll;
 
-  width: 100%;
- }
+       width: 80vw;
+     }
+
+     .week {
+      flex-shrink: 0;
+
+      width: 100%;
+     }
+    }
+
+    .responsiveness {
+      .week__weathers-and-days {
+        margin: 0;
+      }
+      .weather-miniature__vcontainer {
+        // width: 72px;
+        // height: 72px;
+      }
+    }
+
+    .transition();
+    .responsiveness();
 
 }
 
@@ -716,5 +742,7 @@ p {
 .en-cours();
 
 .utilities();
+
+
 
 

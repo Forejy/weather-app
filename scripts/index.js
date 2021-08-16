@@ -1,13 +1,13 @@
-  function cloud(size) {
-  const scale = [2.94117647059, 3.333, 5];
-  // let calcScale = [size/scale[0], size/scale[1], size/scale[2]];
-  let baseFrequency = 0.04;
-  let calcScale = 10;
+function cloud(size) {
+const scale = [2.94117647059, 3.333, 5];
+// let calcScale = [size/scale[0], size/scale[1], size/scale[2]];
+let baseFrequency = 0.04;
+let calcScale = 10;
 
-  const cloudSVG = "<div class=\"cloud\" id=\"cloud-back\"></div><svg width=\"0\" height=\"0\"><filter id=\"filter-back\"><feTurbulence type=\"fractalNoise\" baseFrequency=\"" + baseFrequency + "\" numOctaves=\"4\"/><feDisplacementMap  in=\"SourceGraphic\" scale=\"" + calcScale + "\" /></filter><</svg>"
+const cloudSVG = "<div class=\"cloud\" id=\"cloud-back\"></div><svg width=\"0\" height=\"0\"><filter id=\"filter-back\"><feTurbulence type=\"fractalNoise\" baseFrequency=\"" + baseFrequency + "\" numOctaves=\"4\"/><feDisplacementMap  in=\"SourceGraphic\" scale=\"" + calcScale + "\" /></filter><</svg>"
 
-  return cloudSVG;
-  }
+return cloudSVG;
+}
 
 function appendTemperature() {
   const temperatureContainer = document.getElementsByClassName('temperature-container')[0];
@@ -51,7 +51,7 @@ function appendDaysToWeek() {
     }
   }
 
-  function appendWeathers() {
+  function appendWeathersToWeek() {
     let week_weathers = document.getElementById("js-week");
     const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
     const temperatures = ["29°", "30°", "31°", "30°", "30°", "29°", "29°"];
@@ -75,6 +75,9 @@ function appendDaysToWeek() {
     tempCont.appendChild(tempMiniaCont);
     tempCont.appendChild(tempTemperature)
 
+    tempEnCoursResponsiveness = 4;
+    // tempEnCoursResponsiveness -- > daysInWeek
+
     for(let i = 0; i < daysInWeek; i++) {
       tempCont.firstChild.innerText = days[i]; //TODO: Commencer à aujourd'hui
       tempCont.lastChild.innerText = temperatures[i];
@@ -87,7 +90,7 @@ function appendDaysToWeek() {
     let week_temperatures = document.getElementsByClassName("week__temperatures")[0];
   }
 
-  appendWeathers();
+  appendWeathersToWeek();
 }
 
 appendTemperature();
@@ -235,3 +238,5 @@ function dayTemperatures() {
 
 
 dayTemperatures();
+
+
