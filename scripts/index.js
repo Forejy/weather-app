@@ -58,15 +58,18 @@ function appendDaysToWeek() {
 
 
     let tempDay = document.createElement("div");
+    // let tempDay_ = document.createElement("span");
     tempDay.className = "week__day";
+    // tempDay.appendChild(tempDay_);
+
 
     let tempMinia = document.createElement("img");
     let tempMiniaCont = document.createElement("div");
     let tempTemperature = document.createElement("div");
     tempMinia.src = "../media/cloud3.svg";
-    tempMinia.width = "30";
+    tempMinia.className = "weather-miniature__img";
     tempTemperature.className = "week__temperature";
-    tempMiniaCont.className = "weather-miniature__vcontainer";
+    tempMiniaCont.className = "weather-miniature__container-img";
     tempMiniaCont.append(tempMinia);
 
     let tempCont = document.createElement("section");
@@ -74,9 +77,6 @@ function appendDaysToWeek() {
     tempCont.appendChild(tempDay);
     tempCont.appendChild(tempMiniaCont);
     tempCont.appendChild(tempTemperature)
-
-    tempEnCoursResponsiveness = 4;
-    // tempEnCoursResponsiveness -- > daysInWeek
 
     for(let i = 0; i < daysInWeek; i++) {
       tempCont.firstChild.innerText = days[i]; //TODO: Commencer à aujourd'hui

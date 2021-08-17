@@ -483,10 +483,11 @@ p {
   margin: 0 auto;
   padding-right: var(--rpadding);
   padding-left: var(--lpadding);
-  width: 80%;
+  width: 90%;
   // height: 51.28%;
   height: 16.4096vh;
 }
+
 
 .day-temperatures__text {
   display: flex;
@@ -530,21 +531,25 @@ p {
   margin-bottom: 20px;
 }
 
-.weather-miniature__vcontainer {
+.weather-miniature__container-img {
   display: flex;
   justify-content: center;
 
   margin: 7px 0 12px;
   .wh(40px);
-  .wh(11.1111111104vw);
+  .wh(11.1111112vw);
   border-radius: 50%;
   background-color: black;
   background: linear-gradient(-45deg, #303030, #000);
   box-shadow: 3px 2px 1px 0px black, -1px 4px 1px 0px black, -1px -3px 3px -2px white, -3px -1px 2px -2px white;
 }
 
+.weather-miniature__img {
+  width: 75%;
+}
+
 @media (min-aspect-ratio: 10001/10000) {
-  .weather-miniature__vcontainer {
+  .weather-miniature__container-img {
     background: blue;
   }
 }
@@ -688,23 +693,60 @@ p {
        display: flex;
        overflow: scroll;
 
-       width: 80vw;
+       width: 90vw;
      }
+
+
+      @media (min-width: 360px) {
+        #informations {
+          width: 80vw;
+        }
+      }
 
      .week {
       flex-shrink: 0;
 
       width: 100%;
      }
+
+     .week__day, .week__temperature {
+       line-height: 0; //Supprime l'espace en-essous du texte, pour avoir exactement le meme espace entre les 2 morceaux de texte et l'image
+      }
+
+
     }
 
     .responsiveness {
       .week__weathers-and-days {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-around;
+        flex-shrink: 0;
+
         margin: 0;
+        width: 25%;
+        height: 100%;
       }
-      .weather-miniature__vcontainer {
-        // width: 72px;
-        // height: 72px;
+
+      .weather-miniature__container-img {
+        --bs-margin-top: 1px; //y-oo + spread =  (le blur ça se voit pas vraiment quand on regarde l'espacement)
+        --bs-margin-bottom: 4px; //y-off + spread = 4px + 1px +
+
+        margin: var(--bs-margin-top) 0 var(--bs-margin-bottom);
+        box-shadow: 3px 2px 1px 0px black, -1px 4px 1px 0px black, -1px -3px 3px -2px white, -3px -1px 2px -2px white;
+      }
+
+      .second-part::before {
+        height: 8.84375vh !important;
+        top: -8.84375vh;
+      }
+
+
+      @media (min-width: 800px) {
+        .second-part:before {
+          background-image: url(../media/wave_800.svg)
+        }
       }
     }
 
