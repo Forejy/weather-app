@@ -100,63 +100,89 @@ appendDaysToWeek();
 function changeDayOrWeek() {
   const switchContainer = document.getElementById("js-switch-subcontainer");
   let opacity = 0;
-  let transfer = ["0px", "3px"]
+  let transfer = ["0px", "3px"];
+  let classesAdded = [];
+  let forLeftTimeOut;
+  let forRightTimeOut;
 
-  switchContainer.addEventListener("click", function(){
+
+  switchContainer.addEventListener("click", function handler1() {
+    this.removeEventListener("click", handler1);
+
+
     // Switch Button
     switchContainer.style.paddingLeft = transfer[opacity];
     opacity = opacity === 0 ? 1 : 0;
-    switchContainer.style.paddingRight = transfer[opacity]
+    switchContainer.style.paddingRight = transfer[opacity];
     switchContainer.style.setProperty('--switch-b--opacity', opacity);
 
-    let informations = document.getElementById("informations").children;
+    let informationsContainer = document.getElementById("informations");
+    let informations = informationsContainer.children;
     let words = document.getElementsByClassName("day-week__text__words");
+
     for(let i = 0; i < 2; i++) {
       words[i].classList.toggle("text-white");
     }
+
+
+    // for(let i = 0; i < classesAdded.length; i++) {
+    //   informations[1].classList.remove(classesAdded[i]);
+    // }
+    // function reverseEvent() {
+    //   clearTimeout(forLeftTimeOut);
+    //   switchContainer.removeEventListener("click", reverseEvent);
+    //   switchContainer.addEventListener("click", handler1);
+    //   informations[1].classList.add("translate-Xmore100");
+    //   classesAdded.push("translate-Xmore100");
+    //   forRightTimeOut = setTimeout(function () {
+    //     console.log("reverseEvent : ");
+    //   }
+    //   , 2000);
+    // }
+    // switchContainer.addEventListener("click", reverseEvent);
+
+    // informations[1].classList.add("translate-Xless100");
+
+    // clearTimeout(forRightTimeOut);
+    // forLeftTimeOut = setTimeout(function () {
+    //   informations[1].classList.remove("translate-Xless100");
+    //   switchContainer.addEventListener("click", handler1);
+    // }
+    // , 2000);
+
+
+    informationsClass0 = informations[0].classList.toString().replace(" d-none", "");
+    informationsClass1 = informations[1].classList.toString() + " d-none";
+
     // Transition 1
+    informations[0].classList.add("translate-Xless100-day-temperatures");
     informations[0].classList.remove("d-none");
-    informations[1].classList.add("translateX-100notrans");
+    informations[1].classList.add("translate-Xless100notrans");
 
-    // setTimeout(function () {
-      // informations[0].classList.remove("translateX-100");
-      // informations[1].classList.remove("translateX-100notrans");
-    // }
-    // , 2000);
+    setTimeout(function () {
+      informations[0].classList.add("translate-X0");
+      informations[1].classList.add("translate-X0")
+    }
+    , 1000);
 
-    // setTimeout(function () {
-    //   informations[0].classList.remove("translateX-100");
-    // }
-    // , 2500);
+    // Etat après Transition 1
+    setTimeout(function () {
+      informations[0].className = informationsClass0;
+      informations[1].className = informationsClass1;
+    }
+    , 3100);
 
-    // setTimeout(function () {
-    //   informations[1].classList.add("d-none");
-    //   informations[1].classList.add("translateX-173");
-    // }
-    // , 2000);
+    setTimeout(function () {
+      // translateOnClickSecondPart();
+      informationsContainer.insertBefore(informations[1], informationsContainer.firstChild);
+    }
+    , 3100);
+
+    // this.removeEventListener("click", stopEvent);
+
+  });
 
 
-
-
-    // setTimeout(function () {
-
-
-
-    //   informations[0].classList.remove("translateX100");
-    //   informations[0].classList.remove("d-none");
-    // }
-    // , 10);
-    // setTimeout(function () {
-    //   informations[0].classList.remove("translateX-100")
-    //   informations[1].classList.add("translateX100");
-    // }
-    // , 100);
-    // setTimeout(function () {
-    //   informations[1].classList.add("d-none");
-    // }
-    // , 3000);
-
-  })
 }
 
 changeDayOrWeek()
@@ -166,7 +192,7 @@ function dayTemperatures() {
   let containerTemperatureText = document.getElementById("js-day-temperatures__text");
   let containerHours = document.getElementById("js-hours");
 
-  // I. Initialize Graphic
+  // I. Initialise le Graphique
   let containerGraphic = document.getElementById("js-day-temperatures__temperatures");
 
   const dayTemperatures = [25, 30, 30, 26, 25, 30, 25, 35, 30];
@@ -188,19 +214,19 @@ function dayTemperatures() {
   let x2 = wPart; //
   let xC = wPart / 2; //xC1 = xC2
 
-  // II. Initialize Text
+  // II. Initialise le Texte
   let elem = document.createElement("div");
   elem.style.cssText = "flex-shrink:0;position:relative;width:" + wPart + "px;left:-6px;";
 
   let fragment = document.createDocumentFragment();
 
   for(let i = 1; i < dayTemperatures.length; i++) {
-    // Create Graphic
+    // Créer le Graphique
     y2 = (max - dayTemperatures[i]) * hPart;
     let path = "<path style=\"fill: none; stroke: #eee\" d=\"M" + x1 + "," + y1 + " C" + xC + "," + y1 + " " + xC + "," + y2 + " " + x2 + "," + y2 + "\" /></path></svg>";
     tempStr += svgPart + path;
 
-    // Create Text
+    // Créer le Texte
     elem.style.top = (y1) + "px";
     elem.innerText = dayTemperatures[i - 2] !== dayTemperatures[i - 1] ?dayTemperatures[i - 1] + "°" : "";
     fragment.appendChild(elem);

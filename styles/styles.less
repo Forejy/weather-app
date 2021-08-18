@@ -117,22 +117,35 @@ caption {
     display: none;
   }
 
-  .translateX-173 {
-    transform: translateX(-173%);
+  .translate-X100notrans {
+    transform: translateX(-100%);
+    transition: none;
   }
 
-  .translate-X-day-temperatures {
+  .translate-Xless100-day-temperatures {
     transform: translateX(calc(-100% - var(--lpadding) - var(--rpadding)));
   }
 
-  .translateX-100notrans {
-    transform: translateX(-100%);
-    transition: none !important;
+  .translate-X0 {
+    transform: translateX(0%);
+    transition: 2s;
   }
 
-  .translateX100 {
-    transform: translateX(110%);
+  .translate-Xless100 {
+    transform: translateX(-100%);
+    transition: 2s;
   }
+
+
+  .translate-Xmore100-day-temperatures {
+    transform: translateX(calc(100% + var(--lpadding) + var(--rpadding)));
+  }
+
+  .translate-Xmore100 {
+    transform: translateX(100%);
+    transition: 2s;
+  }
+
 }
 
 // MARK: Body
@@ -674,16 +687,11 @@ p {
 
     .transition() {
 
-      .week {
-        transform: translateX(0%);
-        transition: 2s;
-      }
-
      .day-temperatures {
         width: 100%;
 
         transform: translateX(0%);
-        transition: 2s;
+        transition: 2152.78ms;
      }
 
      #informations {
