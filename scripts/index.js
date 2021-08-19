@@ -19,8 +19,7 @@ function appendTemperature() {
   let child = document.createElement("div");
   parent.appendChild(child);
 
-  for (var i = 0; i < len; i++)
-  {
+  for (var i = 0; i < len; i++) {
     parent.firstChild.innerText = tempstr[i];
     parent.firstChild.style.paddingTop = i * 0 +"%";
     parent.firstChild.style.lineHeight = ".5em";
@@ -36,158 +35,113 @@ function appendTemperature() {
   temperatureContainer.appendChild(deg);
 }
 
-function appendDaysToWeek() {
+
+function appendWeathersToWeek() {
   const daysInWeek = 7;
+  let week_weathers = document.getElementById("js-week");
+  const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+  const temperatures = ["29°", "30°", "31°", "30°", "30°", "29°", "29°"];
 
-  function appendDays() {
-    let week_days = document.getElementsByClassName('week__days')[0];
-    const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+  let tempDay = document.createElement("div");
+  tempDay.className = "week__day";
 
-    let tempChild = document.createElement("div");
-    for(let i = 0; i < daysInWeek; i++) {
-      tempChild.innerText = days[i]; //TODO: Commencer à aujourd'hui
-      week_days.appendChild(tempChild);
-      tempChild = tempChild.cloneNode();
-    }
+  let tempMinia = document.createElement("img");
+  let tempMiniaCont = document.createElement("div");
+  let tempTemperature = document.createElement("div");
+  tempMinia.src = "../media/cloud3.svg";
+  tempMinia.className = "weather-miniature__img";
+  tempTemperature.className = "week__temperature";
+  tempMiniaCont.className = "weather-miniature__container-img";
+  tempMiniaCont.append(tempMinia);
+
+  let tempCont = document.createElement("section");
+  tempCont.className = "week__weathers-and-days";
+  tempCont.appendChild(tempDay);
+  tempCont.appendChild(tempMiniaCont);
+  tempCont.appendChild(tempTemperature)
+
+  for(let i = 0; i < daysInWeek; i++) {
+    tempCont.firstChild.innerText = days[i]; //TODO: Commencer à aujourd'hui
+    tempCont.lastChild.innerText = temperatures[i];
+    week_weathers.appendChild(tempCont);
+    tempCont = tempCont.cloneNode(true);
   }
-
-  function appendWeathersToWeek() {
-    let week_weathers = document.getElementById("js-week");
-    const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-    const temperatures = ["29°", "30°", "31°", "30°", "30°", "29°", "29°"];
-
-
-    let tempDay = document.createElement("div");
-    // let tempDay_ = document.createElement("span");
-    tempDay.className = "week__day";
-    // tempDay.appendChild(tempDay_);
-
-
-    let tempMinia = document.createElement("img");
-    let tempMiniaCont = document.createElement("div");
-    let tempTemperature = document.createElement("div");
-    tempMinia.src = "../media/cloud3.svg";
-    tempMinia.className = "weather-miniature__img";
-    tempTemperature.className = "week__temperature";
-    tempMiniaCont.className = "weather-miniature__container-img";
-    tempMiniaCont.append(tempMinia);
-
-    let tempCont = document.createElement("section");
-    tempCont.className = "week__weathers-and-days";
-    tempCont.appendChild(tempDay);
-    tempCont.appendChild(tempMiniaCont);
-    tempCont.appendChild(tempTemperature)
-
-    for(let i = 0; i < daysInWeek; i++) {
-      tempCont.firstChild.innerText = days[i]; //TODO: Commencer à aujourd'hui
-      tempCont.lastChild.innerText = temperatures[i];
-      week_weathers.appendChild(tempCont);
-      tempCont = tempCont.cloneNode(true);
-    }
-  }
-
-  function appendTemperatures() {
-    let week_temperatures = document.getElementsByClassName("week__temperatures")[0];
-  }
-
-  appendWeathersToWeek();
 }
 
 appendTemperature();
-appendDaysToWeek();
+appendWeathersToWeek();
 
 
-function changeDayOrWeek() {
+function transformDayOrWeek() {
   const switchContainer = document.getElementById("js-switch-subcontainer");
+  const containerTransition = document.getElementById("container-transition");
+  const day = containerTransition.children[0];
+  const week = containerTransition.children[1]
   let opacity = 0;
-  let transfer = ["0px", "3px"];
-  let classesAdded = [];
-  let forLeftTimeOut;
-  let forRightTimeOut;
+  const transfer = ["0px", "3px"];
+  let leftToRightTimeout1;
+  let leftToRightTimeout2;
+  let rightToleftTimeout;
 
-
-  switchContainer.addEventListener("click", function handler1() {
-    this.removeEventListener("click", handler1);
-
-
-    // Switch Button
+  function changeSwitchButton() {
     switchContainer.style.paddingLeft = transfer[opacity];
     opacity = opacity === 0 ? 1 : 0;
     switchContainer.style.paddingRight = transfer[opacity];
+    document.getElementsByClassName("switch-lpart")[0].style.setProperty('transition', "2s");
     switchContainer.style.setProperty('--switch-b--opacity', opacity);
 
-    let informationsContainer = document.getElementById("informations");
-    let informations = informationsContainer.children;
+    ;
     let words = document.getElementsByClassName("day-week__text__words");
 
     for(let i = 0; i < 2; i++) {
       words[i].classList.toggle("text-white");
     }
+  }
 
+  switchContainer.addEventListener("click", function rightToleft() {
+    this.removeEventListener("click", rightToleft);
+    clearTimeout(leftToRightTimeout1);
+    clearTimeout(leftToRightTimeout2);
+    changeSwitchButton();
 
-    // for(let i = 0; i < classesAdded.length; i++) {
-    //   informations[1].classList.remove(classesAdded[i]);
-    // }
-    // function reverseEvent() {
-    //   clearTimeout(forLeftTimeOut);
-    //   switchContainer.removeEventListener("click", reverseEvent);
-    //   switchContainer.addEventListener("click", handler1);
-    //   informations[1].classList.add("translate-Xmore100");
-    //   classesAdded.push("translate-Xmore100");
-    //   forRightTimeOut = setTimeout(function () {
-    //     console.log("reverseEvent : ");
-    //   }
-    //   , 2000);
-    // }
-    // switchContainer.addEventListener("click", reverseEvent);
+    switchContainer.addEventListener("click", leftToRight);
 
-    // informations[1].classList.add("translate-Xless100");
+    function leftToRight() {
+      changeSwitchButton();
+      clearTimeout(rightToleftTimeout);
 
-    // clearTimeout(forRightTimeOut);
-    // forLeftTimeOut = setTimeout(function () {
-    //   informations[1].classList.remove("translate-Xless100");
-    //   switchContainer.addEventListener("click", handler1);
-    // }
-    // , 2000);
+      this.removeEventListener("click", leftToRight);
+      switchContainer.addEventListener("click", rightToleft);
 
+      day.classList.remove("d-none");
+      containerTransition.classList.add("informations-trans__translateXless100");
 
-    informationsClass0 = informations[0].classList.toString().replace(" d-none", "");
-    informationsClass1 = informations[1].classList.toString() + " d-none";
+      leftToRightTimeout1 = setTimeout(function () {
+        containerTransition.classList.add("informations-trans__trans2");
+        containerTransition.classList.remove("informations-trans__translateXless100");
+      } , 1);
 
-    // Transition 1
-    informations[0].classList.add("translate-Xless100-day-temperatures");
-    informations[0].classList.remove("d-none");
-    informations[1].classList.add("translate-Xless100notrans");
-
-    setTimeout(function () {
-      informations[0].classList.add("translate-X0");
-      informations[1].classList.add("translate-X0")
+      leftToRightTimeout2 = setTimeout(function () {
+        week.classList.add("d-none");
+        containerTransition.classList.remove( "informations-trans__trans2");
+      } , 2001);
     }
-    , 1000);
 
-    // Etat après Transition 1
-    setTimeout(function () {
-      informations[0].className = informationsClass0;
-      informations[1].className = informationsClass1;
-    }
-    , 3100);
+    week.classList.remove("d-none");
+    containerTransition.classList.add("informations-trans__translateXless100", "informations-trans__trans2");
 
-    setTimeout(function () {
-      // translateOnClickSecondPart();
-      informationsContainer.insertBefore(informations[1], informationsContainer.firstChild);
-    }
-    , 3100);
-
-    // this.removeEventListener("click", stopEvent);
-
+    rightToleftTimeout = setTimeout(function () {
+      day.classList.add("d-none");
+      containerTransition.classList.remove("informations-trans__translateXless100", "informations-trans__trans2");
+    } , 2000);
   });
-
-
 }
 
-changeDayOrWeek()
+transformDayOrWeek();
 
-function dayTemperatures() {
+function appendTemperaturesToDay() {
+
+  let containerDayTemperatures = document.getElementById("js-day-temperatures");
 
   let containerTemperatureText = document.getElementById("js-day-temperatures__text");
   let containerHours = document.getElementById("js-hours");
@@ -200,7 +154,7 @@ function dayTemperatures() {
   const range = max - Math.min(...dayTemperatures);
   const tempTextDecalage = 3;
   const containerBig = document.getElementById("informations");
-  const wContainer = containerBig.clientWidth - parseInt(window.getComputedStyle(containerBig).paddingLeft) - parseInt(window.getComputedStyle(containerBig).paddingRight);
+  const wContainer = containerDayTemperatures.clientWidth - parseInt(window.getComputedStyle(containerDayTemperatures).paddingLeft) - parseInt(window.getComputedStyle(containerDayTemperatures).paddingRight);
   let hContainer = containerBig.clientHeight - (parseInt(window.getComputedStyle(containerTemperatureText).lineHeight) + tempTextDecalage) - parseInt(window.getComputedStyle(containerHours).lineHeight) - parseInt(window.getComputedStyle(containerHours).marginTop);
   containerGraphic.style.height = hContainer + "px";
   const wPart = (wContainer / ((dayTemperatures.length - 1))); //-1 parce que j'affiche les temperatures par 2 consécutivement;
@@ -228,7 +182,7 @@ function dayTemperatures() {
 
     // Créer le Texte
     elem.style.top = (y1) + "px";
-    elem.innerText = dayTemperatures[i - 2] !== dayTemperatures[i - 1] ?dayTemperatures[i - 1] + "°" : "";
+    elem.innerText = dayTemperatures[i - 1] + "°";
     fragment.appendChild(elem);
     elem = elem.cloneNode();
 
@@ -260,9 +214,6 @@ function dayTemperatures() {
   dayHours();
 }
 
-
-
-
-dayTemperatures();
+appendTemperaturesToDay();
 
 

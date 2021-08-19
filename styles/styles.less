@@ -117,35 +117,21 @@ caption {
     display: none;
   }
 
-  .translate-X100notrans {
-    transform: translateX(-100%);
-    transition: none;
+  .informations-trans__translateXless100 {
+    transform: translateX(-100%); //Si je veux le rendre responsive, mettre la propriété left de day-temperatures__hours en %
   }
 
-  .translate-Xless100-day-temperatures {
-    transform: translateX(calc(-100% - var(--lpadding) - var(--rpadding)));
-  }
-
-  .translate-X0 {
-    transform: translateX(0%);
+  .informations-trans__trans2 {
     transition: 2s;
   }
 
-  .translate-Xless100 {
-    transform: translateX(-100%);
-    transition: 2s;
+  .informations-trans__trans0 {
+    transition: 0s;
   }
 
-
-  .translate-Xmore100-day-temperatures {
-    transform: translateX(calc(100% + var(--lpadding) + var(--rpadding)));
+  .informations-trans__padding0 {
+    padding: 0;
   }
-
-  .translate-Xmore100 {
-    transform: translateX(100%);
-    transition: 2s;
-  }
-
 }
 
 // MARK: Body
@@ -211,12 +197,6 @@ body {
   height: 25%;
 }
 
-// MARK: Images
-
-// .cloud {
-//   height: 21vh;
-// }
-
 // MARK: Temperature and City
 
 .temperature-city__text {
@@ -225,7 +205,6 @@ body {
 }
 
 .temperature-city {
-  // margin: calc(@first-part-height/2) auto 0;
   width: max-content;
 }
 
@@ -241,6 +220,7 @@ body {
 // MARK: Cloud
 
 .big-cloud() {
+  // NE PAS SUPPRIMER
 
   // @cloud-w: 500px;
   // @cloud-h: 275px;
@@ -314,7 +294,6 @@ body {
       box-shadow: #000 0 31.325px 3px -10px,  0 31.325px 4px -6px #9ea8b3, #fff 0 31.325px 2px -3px;
     }
   }
-
 
   #cloud--black() {
     @bs-y-mid: calc(@bs-y1 + 5px);
@@ -404,10 +383,6 @@ p {
 // MARK: Fonts
 
 .fonts() {
-  @font-face {
-    font-family: 'Bank Gothic Light';
-    src: url('../fonts/Bank\ Gothic\ Light\ Regular.otf');
-  }
 
   @font-face {
     font-family: 'Bank Gothic Medium';
@@ -436,17 +411,6 @@ p {
     font-family: 'Josef Normal';
   }
 
-
-  @font-face {
-    font-family: 'Josef Sans Regular';
-    src: url('../fonts/Josefin Sans Regular.ttf');
-  }
-
-  .ff--JSR {
-    font-family: 'Josef Sans Regular';
-    color: white;
-  }
-
   @font-face {
     font-family: 'Neo Latina';
     src: url('../fonts/neo-latina-demo-FFP.ttf');
@@ -464,15 +428,27 @@ p {
   .ff--TG {
     font-family: 'TapeGun';
   }
-
-  .ff--BGL {
-    font-family: 'Bank Gothic Light';
-  }
 }
 
-.fonts();
+@font-face {
+  font-family: 'Bank Gothic Light';
+  src: url('../fonts/Bank\ Gothic\ Light\ Regular.otf');
+}
 
 
+.ff--BGL {
+  font-family: 'Bank Gothic Light';
+}
+
+@font-face {
+  font-family: 'Josef Sans Regular';
+  src: url('../fonts/Josefin Sans Regular.ttf');
+}
+
+.ff--JSR {
+  font-family: 'Josef Sans Regular';
+  color: white;
+}
 
 .temperature-container {
   font-size: 4.5rem;
@@ -493,12 +469,30 @@ p {
 // MARK: II.1 - Week
 
 #informations {
+  display: flex;
+  overflow: hidden;
+
   margin: 0 auto;
-  padding-right: var(--rpadding);
-  padding-left: var(--lpadding);
   width: 90%;
-  // height: 51.28%;
   height: 16.4096vh;
+}
+
+@media (min-width: 360px) {
+  #informations {
+    width: 80vw;
+  }
+}
+
+#container-transition {
+  display: flex;
+  width: 100%;
+}
+
+.day-temperatures {
+  box-sizing: border-box;
+
+  padding: 0 12px 0 10px;
+  width: 100%;
 }
 
 
@@ -513,13 +507,14 @@ p {
 
 .week {
   display: flex;
+  flex-shrink: 0;
   height: 100%;
   align-items: end;
 
   text-align: center;
   overflow-x: scroll;
 
-  width: 315px;
+  width: 100%;
 }
 
 .week__weathers-and-days {
@@ -537,6 +532,10 @@ p {
 
   color: #ccc;
 }
+
+.week__day, .week__temperature {
+  line-height: 0; //Supprime l'espace en-essous du texte, pour avoir exactement le meme espace entre les 2 morceaux de texte et l'image
+ }
 
 .weather-miniature {
   .br(50%);
@@ -569,6 +568,7 @@ p {
 
 .day-temperatures__hours {
   display: flex;
+  width: max-content;
 
   position: relative;
   left: -10px;
@@ -583,8 +583,7 @@ p {
 // MARK: II.2 - Switch
 
 .switch() {
-  @switch-width: 30px; //Encours
-  // @switch-width: 20px; //Encours
+  @switch-width: 30px;
 
   .switch-container {
     display: flex;
@@ -603,7 +602,6 @@ p {
 
     height: 26px;
   }
-
 
   .switch {
     display: block;
@@ -628,7 +626,6 @@ p {
     background: linear-gradient(90deg, #ddd 40%, #ccc 90%);
     box-shadow: -5px 0px 1px -2px black;
   }
-
 
   .switch-rpart {
     border-top-right-radius: 40% 50%;
@@ -670,7 +667,6 @@ p {
     background: linear-gradient(-90deg, #ddd 40%, #ccc 90%);
     box-shadow: 5px 0px 1px -2px black;
 
-
     opacity: var(--switch-b--opacity);
   }
 }
@@ -687,39 +683,9 @@ p {
 
     .transition() {
 
-     .day-temperatures {
-        width: 100%;
-
-        transform: translateX(0%);
-        transition: 2152.78ms;
-     }
-
-     #informations {
-       --lpadding: 10px;
-       --rpadding: 12px;
-
-       display: flex;
-       overflow: scroll;
-
-       width: 90vw;
-     }
-
-
-      @media (min-width: 360px) {
-        #informations {
-          width: 80vw;
-        }
-      }
-
-     .week {
-      flex-shrink: 0;
-
-      width: 100%;
-     }
-
-     .week__day, .week__temperature {
-       line-height: 0; //Supprime l'espace en-essous du texte, pour avoir exactement le meme espace entre les 2 morceaux de texte et l'image
-      }
+    //  .week__day, .week__temperature {
+    //    line-height: 0; //Supprime l'espace en-essous du texte, pour avoir exactement le meme espace entre les 2 morceaux de texte et l'image
+    //   }
 
 
     }
@@ -758,9 +724,7 @@ p {
       }
     }
 
-    .transition();
     .responsiveness();
-
 }
 
 .switch();
@@ -776,23 +740,14 @@ p {
   height: 25%;
 }
 
-.day-week__text() {
-  .day-week__text {
-    color: black;
-    font-size: .8rem;
-  }
+.day-week__text {
+  color: black;
+  font-size: .8rem;
 }
-
-.day-week__text();
 
 .dayTemperatureText {
   position: relative;
 }
 
 .en-cours();
-
 .utilities();
-
-
-
-

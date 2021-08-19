@@ -169,26 +169,8 @@ p {
   font-family: 'Bank Gothic Light';
   src: url('../fonts/Bank\ Gothic\ Light\ Regular.otf');
 }
-@font-face {
-  font-family: 'Bank Gothic Medium';
-  src: url('../fonts/Bank\ Gothic\ Medium.otf');
-}
-.ff--BGM {
-  font-family: 'Bank Gothic Medium';
-}
-@font-face {
-  font-family: 'Bank Gothic DB Regular';
-  src: url('../fonts/BankGothic\ DB\ Regular.ttf');
-}
-.ff--BGDBR {
-  font-family: 'Bank Gothic DB Regular';
-}
-@font-face {
-  font-family: 'Josef Normal';
-  src: url('../fonts/Josef Normal.ttf');
-}
-.ff--JN {
-  font-family: 'Josef Normal';
+.ff--BGL {
+  font-family: 'Bank Gothic Light';
 }
 @font-face {
   font-family: 'Josef Sans Regular';
@@ -197,23 +179,6 @@ p {
 .ff--JSR {
   font-family: 'Josef Sans Regular';
   color: white;
-}
-@font-face {
-  font-family: 'Neo Latina';
-  src: url('../fonts/neo-latina-demo-FFP.ttf');
-}
-.ff--NL {
-  font-family: 'Neo Latina';
-}
-@font-face {
-  font-family: 'TapeGun';
-  src: url('../fonts/TapeGun.ttf');
-}
-.ff--TG {
-  font-family: 'TapeGun';
-}
-.ff--BGL {
-  font-family: 'Bank Gothic Light';
 }
 .temperature-container {
   font-size: 4.5rem;
@@ -228,11 +193,25 @@ p {
   align-items: center;
 }
 #informations {
+  display: flex;
+  overflow: hidden;
   margin: 0 auto;
-  padding-right: var(--rpadding);
-  padding-left: var(--lpadding);
   width: 90%;
   height: 16.4096vh;
+}
+@media (min-width: 360px) {
+  #informations {
+    width: 80vw;
+  }
+}
+#container-transition {
+  display: flex;
+  width: 100%;
+}
+.day-temperatures {
+  box-sizing: border-box;
+  padding: 0 12px 0 10px;
+  width: 100%;
 }
 .day-temperatures__text {
   display: flex;
@@ -243,11 +222,12 @@ p {
 }
 .week {
   display: flex;
+  flex-shrink: 0;
   height: 100%;
   align-items: end;
   text-align: center;
   overflow-x: scroll;
-  width: 315px;
+  width: 100%;
 }
 .week__weathers-and-days {
   margin: 8px 14px;
@@ -259,6 +239,10 @@ p {
 .week__temperature {
   font-size: 0.9em;
   color: #ccc;
+}
+.week__day,
+.week__temperature {
+  line-height: 0;
 }
 .weather-miniature {
   border-radius: 50%;
@@ -288,6 +272,7 @@ p {
 }
 .day-temperatures__hours {
   display: flex;
+  width: max-content;
   position: relative;
   left: -10px;
   margin-top: 8px;
@@ -397,31 +382,6 @@ p {
     background-image: url(../media/wave_800.svg);
   }
 }
-.day-temperatures {
-  width: 100%;
-  transform: translateX(0%);
-  transition: 2152.78ms;
-}
-#informations {
-  --lpadding: 10px;
-  --rpadding: 12px;
-  display: flex;
-  overflow: scroll;
-  width: 90vw;
-}
-@media (min-width: 360px) {
-  #informations {
-    width: 80vw;
-  }
-}
-.week {
-  flex-shrink: 0;
-  width: 100%;
-}
-.week__day,
-.week__temperature {
-  line-height: 0;
-}
 .week__weathers-and-days {
   display: flex;
   flex-direction: column;
@@ -453,25 +413,15 @@ p {
 .d-none {
   display: none;
 }
-.translate-X100notrans {
+.informations-trans__translateXless100 {
   transform: translateX(-100%);
-  transition: none;
 }
-.translate-Xless100-day-temperatures {
-  transform: translateX(calc(-100% - var(--lpadding) - var(--rpadding)));
-}
-.translate-X0 {
-  transform: translateX(0%);
+.informations-trans__trans2 {
   transition: 2s;
 }
-.translate-Xless100 {
-  transform: translateX(-100%);
-  transition: 2s;
+.informations-trans__trans0 {
+  transition: 0s;
 }
-.translate-Xmore100-day-temperatures {
-  transform: translateX(calc(100% + var(--lpadding) + var(--rpadding)));
-}
-.translate-Xmore100 {
-  transform: translateX(100%);
-  transition: 2s;
+.informations-trans__padding0 {
+  padding: 0;
 }
