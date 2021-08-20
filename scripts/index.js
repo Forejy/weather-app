@@ -217,3 +217,100 @@ function appendTemperaturesToDay() {
 appendTemperaturesToDay();
 
 
+
+function handleWeatherInfo() {
+
+  // let test = fetch(strFile).then(function(response) { console.log(response.responseType)});
+  // let test2 = fetch(strFile).then(function(response) {
+      // response.body.getReader().read().then(function processText({done, value}) {
+        // console.log(value)
+      // })
+  // });
+  // let test2 = fetch(strFile).then(response => response.text())
+  // .then(temp = function(text) {
+  //     return text;
+  //   });
+  //   console.log(temp());
+
+  // let test3 = fetch(strFile).then(temp = function(response) {
+  //   return response.text();
+  // }
+  // );
+
+  // var temp;
+  // let test3 = function testThen() {
+  //   fetch(strFile).then(function(response) {
+  //     response.text().then(function(text) {
+  //       console.log(text);
+  //       temp = text;
+  //       console.log(temp);
+  //     })
+  //   });
+  // }
+
+
+  let strFile = "../APIkey.txt";
+
+  async function fetchText() {
+    let response = await fetch(strFile);
+    let data = await response.text();
+    callWeatherAPI(data);
+  }
+
+  // let ret = fetchText();
+  // let ret2 = ret.then(function(data) {
+  //   return data;
+  // })
+
+  async function callWeatherAPI(APIkey) {
+    // let city = 'Angouleme';
+    // let country = 'fr'
+    // let url = "http://api.openweathermap.org/data/2.5/weather?q=" + city + "," + country + "&appid=" + APIkey;
+
+    let lat = 45.6484
+    let lon = 0.1562
+    let url = "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=-" + lon + "&units=metric" + "&exclude=minutely&appid=" + APIkey;
+
+    console.log(url)
+
+    try {
+      let response = await fetch(url);
+      console.log(await response.json());
+    } catch (err) {
+      console.log(err);
+    }
+
+  }
+
+  fetchText();
+
+// TODO: Raccorder le graphic maker aux donnéees
+// TODO: Afficher le numéro de l'erreur à la place des graphiques
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  // let test2 = fetch(strFile).then(response => response.text())
+  // .then(response => console.log(response));
+
+  // test2.body.getReader();
+  // fetch('https://url.com/some/url')
+  // .then(function(response) {
+  //   // Successful response :)
+  // })
+  // .catch(function(err) {
+  //   // Error :(
+  // });
+}
+
+handleWeatherInfo();
