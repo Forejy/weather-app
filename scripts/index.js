@@ -9,18 +9,26 @@ const cloudSVG = "<div class=\"cloud\" id=\"cloud-back\"></div><svg width=\"0\" 
 return cloudSVG;
 }
 
-function appendTemperature() {
+function currentWeather() {
+  return callWeatherAPI(current)
+}
+
+async function appendTemperature() {
+  const temperatureCityContainer = document.getElementsByClassName('temperature-city__text')[0];
   const temperatureContainer = document.getElementsByClassName('temperature-container')[0];
-  const tempstr = "35°"
+  const weather = await callWeatherAPI("current");
+  console.log(weather[0].toString());
+  const tempeStr = weather[0].toString();
+  const weatherstr = weather[1];
   let fragment = document.createDocumentFragment();
-  let len = tempstr.length - 1;
+  let len = tempeStr.length;
 
   let parent = document.createElement("div");
   let child = document.createElement("div");
   parent.appendChild(child);
 
   for (var i = 0; i < len; i++) {
-    parent.firstChild.innerText = tempstr[i];
+    parent.firstChild.innerText = tempeStr[i];
     parent.firstChild.style.paddingTop = i * 0 +"%";
     parent.firstChild.style.lineHeight = ".5em";
 
@@ -30,8 +38,8 @@ function appendTemperature() {
   temperatureContainer.appendChild(fragment);
 
   let deg = parent.cloneNode();
-  deg.className = "temperature";
-  deg.innerText = tempstr.substring(i);
+  deg.className = "temperature-weather";
+  deg.innerText = tempeStr.substring(i);
   temperatureContainer.appendChild(deg);
 }
 
@@ -218,99 +226,59 @@ appendTemperaturesToDay();
 
 
 
-function handleWeatherInfo() {
 
-  // let test = fetch(strFile).then(function(response) { console.log(response.responseType)});
-  // let test2 = fetch(strFile).then(function(response) {
-      // response.body.getReader().read().then(function processText({done, value}) {
-        // console.log(value)
-      // })
-  // });
-  // let test2 = fetch(strFile).then(response => response.text())
-  // .then(temp = function(text) {
-  //     return text;
-  //   });
-  //   console.log(temp());
+async function fetchText() {
+  const strFile = "../APIkey.txt";
+  let response = await fetch(strFile);
+  let data = await response.text();
+  return data;
+}
 
-  // let test3 = fetch(strFile).then(temp = function(response) {
-  //   return response.text();
-  // }
-  // );
+async function callWeatherAPI(timespan) {
 
-  // var temp;
-  // let test3 = function testThen() {
-  //   fetch(strFile).then(function(response) {
-  //     response.text().then(function(text) {
-  //       console.log(text);
-  //       temp = text;
-  //       console.log(temp);
-  //     })
-  //   });
-  // }
-
-
-  let strFile = "../APIkey.txt";
-
-  async function fetchText() {
-    let response = await fetch(strFile);
-    let data = await response.text();
-    callWeatherAPI(data);
+  let APIkey;
+  try {
+    APIkey = await fetchText();
+  }
+  catch (err) {
+    console.log("Erreur lors de l'ouverture d'APItext.txt : " + err)
   }
 
-  // let ret = fetchText();
-  // let ret2 = ret.then(function(data) {
-  //   return data;
-  // })
+  let args = ["current", "hour", "week"];
 
-  async function callWeatherAPI(APIkey) {
-    // let city = 'Angouleme';
-    // let country = 'fr'
-    // let url = "http://api.openweathermap.org/data/2.5/weather?q=" + city + "," + country + "&appid=" + APIkey;
 
-    let lat = 45.6484
-    let lon = 0.1562
-    let url = "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=-" + lon + "&units=metric" + "&exclude=minutely&appid=" + APIkey;
+  let lat = 45.6484
+  let lon = 0.1562
+  let url = "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=-" + lon + "&units=metric" + "&exclude=minutely&appid=" + APIkey;
 
-    console.log(url)
+  try {
+    let request = await fetch(url);
+    let response = await request.json();
 
-    try {
-      let response = await fetch(url);
-      console.log(await response.json());
-    } catch (err) {
-      console.log(err);
+    if (timespan === 'current') {
+      // await console.log(Math.round(response.current.temp));
+      // await console.log(response.current.weather[0].description);
+      return [Math.round(response.current.temp), response.current.weather[0].description]
     }
+    else if (timespan === 'daily') {
 
+    }
+    else { //hourly
+
+    }
+  } catch (err) {
+    console.log("Erreur lors de la tentative de fetch l'api openweather : " + err);
   }
+}
 
-  fetchText();
+  callWeatherAPI("current");
+
+
+
+
+
+
+
 
 // TODO: Raccorder le graphic maker aux donnéees
 // TODO: Afficher le numéro de l'erreur à la place des graphiques
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  // let test2 = fetch(strFile).then(response => response.text())
-  // .then(response => console.log(response));
-
-  // test2.body.getReader();
-  // fetch('https://url.com/some/url')
-  // .then(function(response) {
-  //   // Successful response :)
-  // })
-  // .catch(function(err) {
-  //   // Error :(
-  // });
-}
-
-handleWeatherInfo();
