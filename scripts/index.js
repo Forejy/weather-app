@@ -9,10 +9,6 @@ const cloudSVG = "<div class=\"cloud\" id=\"cloud-back\"></div><svg width=\"0\" 
 return cloudSVG;
 }
 
-function currentWeather() {
-  return callWeatherAPI(current)
-}
-
 async function appendTemperature() {
   const weather = await callWeatherAPI("current");
 
@@ -48,11 +44,13 @@ async function appendTemperature() {
 }
 
 
-function appendWeathersToWeek() {
+async function appendWeathersToWeek() {
   const daysInWeek = 7;
   let week_weathers = document.getElementById("js-week");
-  const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-  const temperatures = ["29°", "30°", "31°", "30°", "30°", "29°", "29°"];
+  const daysOfWeek = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+  const today = new Date().getDay();
+  const days = daysOfWeek.slice(today).concat(daysOfWeek.slice(0, today));
+  const temperatures =  await callWeatherAPI("daily");
 
   let tempDay = document.createElement("div");
   tempDay.className = "week__day";
@@ -84,74 +82,7 @@ appendTemperature();
 appendWeathersToWeek();
 
 
-function transformDayOrWeek() {
-  const switchContainer = document.getElementById("js-switch-subcontainer");
-  const containerTransition = document.getElementById("container-transition");
-  const day = containerTransition.children[0];
-  const week = containerTransition.children[1]
-  let opacity = 0;
-  const transfer = ["0px", "3px"];
-  let leftToRightTimeout1;
-  let leftToRightTimeout2;
-  let rightToleftTimeout;
-
-  function changeSwitchButton() {
-    switchContainer.style.paddingLeft = transfer[opacity];
-    opacity = opacity === 0 ? 1 : 0;
-    switchContainer.style.paddingRight = transfer[opacity];
-    document.getElementsByClassName("switch-lpart")[0].style.setProperty('transition', "2s");
-    switchContainer.style.setProperty('--switch-b--opacity', opacity);
-
-    ;
-    let words = document.getElementsByClassName("day-week__text__words");
-
-    for(let i = 0; i < 2; i++) {
-      words[i].classList.toggle("text-white");
-    }
-  }
-
-  switchContainer.addEventListener("click", function rightToleft() {
-    this.removeEventListener("click", rightToleft);
-    clearTimeout(leftToRightTimeout1);
-    clearTimeout(leftToRightTimeout2);
-    changeSwitchButton();
-
-    switchContainer.addEventListener("click", leftToRight);
-
-    function leftToRight() {
-      changeSwitchButton();
-      clearTimeout(rightToleftTimeout);
-
-      this.removeEventListener("click", leftToRight);
-      switchContainer.addEventListener("click", rightToleft);
-
-      day.classList.remove("d-none");
-      containerTransition.classList.add("informations-trans__translateXless100");
-
-      leftToRightTimeout1 = setTimeout(function () {
-        containerTransition.classList.add("informations-trans__trans2");
-        containerTransition.classList.remove("informations-trans__translateXless100");
-      } , 1);
-
-      leftToRightTimeout2 = setTimeout(function () {
-        week.classList.add("d-none");
-        containerTransition.classList.remove( "informations-trans__trans2");
-      } , 2001);
-    }
-
-    week.classList.remove("d-none");
-    containerTransition.classList.add("informations-trans__translateXless100", "informations-trans__trans2");
-
-    rightToleftTimeout = setTimeout(function () {
-      day.classList.add("d-none");
-      containerTransition.classList.remove("informations-trans__translateXless100", "informations-trans__trans2");
-    } , 2000);
-  });
-}
-
-transformDayOrWeek();
-
-function appendTemperaturesToDay() {
+async function appendTemperaturesToDay() {
 
   let containerDayTemperatures = document.getElementById("js-day-temperatures");
 
@@ -161,7 +92,8 @@ function appendTemperaturesToDay() {
   // I. Initialise le Graphique
   let containerGraphic = document.getElementById("js-day-temperatures__temperatures");
 
-  const dayTemperatures = [25, 30, 30, 26, 25, 30, 25, 35, 30];
+  // const dayTemperatures = [25, 30, 30, 26, 25, 30, 25, 35, 30];
+  const dayTemperatures =  await callWeatherAPI("hourly");
   const max = Math.max(...dayTemperatures);
   const range = max - Math.min(...dayTemperatures);
   const tempTextDecalage = 3;
@@ -228,6 +160,73 @@ function appendTemperaturesToDay() {
 
 appendTemperaturesToDay();
 
+function transformDayOrWeek() {
+  const switchContainer = document.getElementById("js-switch-subcontainer");
+  const containerTransition = document.getElementById("container-transition");
+  const day = containerTransition.children[0];
+  const week = containerTransition.children[1]
+  let opacity = 0;
+  const transfer = ["0px", "3px"];
+  let leftToRightTimeout1;
+  let leftToRightTimeout2;
+  let rightToleftTimeout;
+
+  function changeSwitchButton() {
+    switchContainer.style.paddingLeft = transfer[opacity];
+    opacity = opacity === 0 ? 1 : 0;
+    switchContainer.style.paddingRight = transfer[opacity];
+    document.getElementsByClassName("switch-lpart")[0].style.setProperty('transition', "2s");
+    switchContainer.style.setProperty('--switch-b--opacity', opacity);
+
+    ;
+    let words = document.getElementsByClassName("day-week__text__words");
+
+    for(let i = 0; i < 2; i++) {
+      words[i].classList.toggle("text-white");
+    }
+  }
+
+  switchContainer.addEventListener("click", function rightToleft() {
+    this.removeEventListener("click", rightToleft);
+    clearTimeout(leftToRightTimeout1);
+    clearTimeout(leftToRightTimeout2);
+    changeSwitchButton();
+
+    switchContainer.addEventListener("click", leftToRight);
+
+    function leftToRight() {
+      changeSwitchButton();
+      clearTimeout(rightToleftTimeout);
+
+      this.removeEventListener("click", leftToRight);
+      switchContainer.addEventListener("click", rightToleft);
+
+      day.classList.remove("d-none");
+      containerTransition.classList.add("informations-trans__translateXless100");
+
+      leftToRightTimeout1 = setTimeout(function () {
+        containerTransition.classList.add("informations-trans__trans2"); //TODO: Si je reclique après que la première transition se soit terminée (et non pendant), la seconde transition ne se fait pas, l'item prend brutalement la place de l'autre.
+        containerTransition.classList.remove("informations-trans__translateXless100");
+      } , 1);
+
+      leftToRightTimeout2 = setTimeout(function () {
+        week.classList.add("d-none");
+        containerTransition.classList.remove( "informations-trans__trans2");
+      } , 2001);
+    }
+
+    week.classList.remove("d-none");
+    containerTransition.classList.add("informations-trans__translateXless100", "informations-trans__trans2");
+
+    rightToleftTimeout = setTimeout(function () {
+      day.classList.add("d-none");
+      containerTransition.classList.remove("informations-trans__translateXless100", "informations-trans__trans2");
+    } , 2000);
+  });
+}
+
+transformDayOrWeek();
+
 
 
 
@@ -248,9 +247,6 @@ async function callWeatherAPI(timespan) {
     console.log("Erreur lors de l'ouverture d'APItext.txt : " + err)
   }
 
-  let args = ["current", "hour", "week"];
-
-
   let lat = 45.6484
   let lon = 0.1562
   let url = "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=-" + lon + "&units=metric" + "&exclude=minutely&appid=" + APIkey;
@@ -260,22 +256,26 @@ async function callWeatherAPI(timespan) {
     let response = await request.json();
 
     if (timespan === 'current') {
-      // await console.log(Math.round(response.current.temp));
-      // await console.log(response.current.weather[0].description);
       return [Math.round(response.current.temp), response.current.weather[0].description]
     }
-    else if (timespan === 'daily') {
+    else if (timespan === 'hourly') {
+      let responseHourly = await response.hourly;
+      let temperatures = [];
+      temperatures = Array.from(responseHourly.slice(0, 9).map(object => Math.round(object.temp)))
 
+      return temperatures;
     }
-    else { //hourly
+    else { //daily
+      let responseDaily = await response.daily;
+      let temperatures = [];
+      temperatures = Array.from(responseDaily.slice(0, 7).map(object => Math.round(object.temp.day)))
 
+      return temperatures;
     }
   } catch (err) {
     console.log("Erreur lors de la tentative de fetch l'api openweather : " + err);
   }
 }
-
-  callWeatherAPI("current");
 
 
 
