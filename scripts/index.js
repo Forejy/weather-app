@@ -14,12 +14,13 @@ function currentWeather() {
 }
 
 async function appendTemperature() {
-  const temperatureCityContainer = document.getElementsByClassName('temperature-city__text')[0];
-  const temperatureContainer = document.getElementsByClassName('temperature-container')[0];
   const weather = await callWeatherAPI("current");
-  console.log(weather[0].toString());
+
+  const temperatureCityContainer = document.getElementsByClassName('temperature-city__text')[0];
+  const temperatureContainer = temperatureCityContainer.firstChild;
+  const weatherContainer = temperatureCityContainer.lastChild;
   const tempeStr = weather[0].toString();
-  const weatherstr = weather[1];
+  const weatherStr = weather[1];
   let fragment = document.createDocumentFragment();
   let len = tempeStr.length;
 
@@ -32,15 +33,18 @@ async function appendTemperature() {
     parent.firstChild.style.paddingTop = i * 0 +"%";
     parent.firstChild.style.lineHeight = ".5em";
 
-    fragment.append(parent);
+    fragment.appendChild(parent);
     parent = parent.cloneNode(true);
   }
   temperatureContainer.appendChild(fragment);
 
   let deg = parent.cloneNode();
   deg.className = "temperature-weather";
-  deg.innerText = tempeStr.substring(i);
+  deg.innerText = "°";
   temperatureContainer.appendChild(deg);
+
+  weatherStr[0].toUpperCase();
+  weatherContainer.innerText = weatherStr.charAt(0).toUpperCase() + weatherStr.slice(1);
 }
 
 
