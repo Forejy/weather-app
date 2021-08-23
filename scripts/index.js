@@ -92,7 +92,6 @@ async function appendTemperaturesToDay() {
   // I. Initialise le Graphique
   let containerGraphic = document.getElementById("js-day-temperatures__temperatures");
 
-  // const dayTemperatures = [25, 30, 30, 26, 25, 30, 25, 35, 30];
   const dayTemperatures =  await callWeatherAPI("hourly");
   const max = Math.max(...dayTemperatures);
   const range = max - Math.min(...dayTemperatures);
@@ -148,7 +147,7 @@ async function appendTemperaturesToDay() {
 
     for(let i = 0; i < dayTemperatures.length; i++) {
       elem.innerText = (time <= 9 ? "0" + time : time) + ":00";
-      time = time + 1;
+      time = time === 23 ? 0 : time + 1;
       fragment.appendChild(elem);
 
       elem = elem.cloneNode();
@@ -200,28 +199,19 @@ function transformDayOrWeek() {
 
       this.removeEventListener("click", leftToRight);
       switchContainer.addEventListener("click", rightToleft);
-
-      day.classList.remove("d-none");
-      containerTransition.classList.add("informations-trans__translateXless100");
-
-      leftToRightTimeout1 = setTimeout(function () {
-        containerTransition.classList.add("informations-trans__trans2"); //TODO: Si je reclique après que la première transition se soit terminée (et non pendant), la seconde transition ne se fait pas, l'item prend brutalement la place de l'autre.
-        containerTransition.classList.remove("informations-trans__translateXless100");
-      } , 1);
+      containerTransition.classList.remove("informations-trans__translateXless100");
 
       leftToRightTimeout2 = setTimeout(function () {
-        week.classList.add("d-none");
         containerTransition.classList.remove( "informations-trans__trans2");
       } , 2001);
     }
 
-    week.classList.remove("d-none");
     containerTransition.classList.add("informations-trans__translateXless100", "informations-trans__trans2");
 
-    rightToleftTimeout = setTimeout(function () {
-      day.classList.add("d-none");
-      containerTransition.classList.remove("informations-trans__translateXless100", "informations-trans__trans2");
-    } , 2000);
+    // rightToleftTimeout = setTimeout(function () {
+    //   day.classList.add("d-none");
+    //   containerTransition.classList.remove("informations-trans__translateXless100", "informations-trans__trans2");
+    // } , 2000);
   });
 }
 

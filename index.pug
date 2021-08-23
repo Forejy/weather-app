@@ -7,13 +7,21 @@ html(lang="en")
     title Weather
   body
     section.first-part
-      section.sun-container
-        div.sun
+      section.moon-container
+        div.moon
         svg(width="0" height="0")
-          filter(id="filter")
-            feTurbulence(type="fractalNoise" result="myTurbulence" baseFrequency=".2" numOctaves="5" seed="2")
+          filter(id="filter2")
+            feTurbulence(type="fractalNoise" result="myTurbulence" baseFrequency=".009" numOctaves="7" seed="2")
             feComposite(operator="in" in="myTurbulence" in2="SourceAlpha" result="myComposite")
-            feColorMatrix(in="myComposite" type="matrix" values="0   0   0   1   1 0   0   0   .25   0 0   0   0   0   0 0   0   0   100  0")
+            feColorMatrix(in="myComposite" type="matrix" values="1   0   1   0  0 1   0   1   0  0  1   0   1   0  0  -.5   .4   -.2   .9 0")
+
+      //- section.sun-container
+      //-   div.sun
+      //-   svg(width="0" height="0")
+      //-     filter(id="filter")
+      //-       feTurbulence(type="fractalNoise" result="myTurbulence" baseFrequency=".2" numOctaves="5" seed="2")
+      //-       feComposite(operator="in" in="myTurbulence" in2="SourceAlpha" result="myComposite")
+      //-       feColorMatrix(in="myComposite" type="matrix" values="0   0   0   1   1 0   0   0   .25   0 0   0   0   0   0 0   0   0   100  0")
       section.temperature-city
         div.temperature-city__text.ff--BGL
           div.temperature-container
@@ -26,7 +34,7 @@ html(lang="en")
             section.day-temperatures__text#js-day-temperatures__text
             section#js-day-temperatures__temperatures
             section.day-temperatures__hours#js-hours
-          section.week.ff--JSR#js-week.d-none
+          section.week.ff--JSR#js-week
       section.day-week
         section.switch-container
           section.switch-subcontainer#js-switch-subcontainer

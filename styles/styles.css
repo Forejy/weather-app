@@ -132,6 +132,20 @@ body {
   box-shadow: #ffffff 68px 31.325px 2px -3px;
   box-shadow: #000 0 31.325px 3px -10px, 0 31.325px 4px -6px #9ea8b3, #fff 0 31.325px 2px -3px;
 }
+.moon {
+  border-radius: 50%;
+  width: 125px;
+  height: 125px;
+  background-color: white;
+  filter: url(#filter2);
+}
+.moon-container {
+  border-radius: 50%;
+  width: calc(125px - 2px);
+  height: calc(125px - 2px);
+  box-shadow: 0 0 14px 5px white, 0 0 20px 4px white;
+  overflow: hidden;
+}
 .sun {
   position: relative;
   top: -1px;
@@ -147,9 +161,6 @@ body {
   width: calc(125px - 2px);
   height: calc(125px - 2px);
   box-shadow: 0 0 14px 5px #ff1600, 0 0 20px 4px yellow;
-}
-.filtered2 {
-  filter: url(#filter2);
 }
 .temperature-container {
   display: flex;
@@ -210,6 +221,7 @@ p {
 }
 .day-temperatures {
   box-sizing: border-box;
+  flex-shrink: 0;
   padding: 0 12px 0 10px;
   width: 100%;
 }
