@@ -12,14 +12,12 @@ function useless(size) {
 async function appendFirstPart() {
   const response = await callWeatherAPI("current");
   // const weather = response[2];
-  const weather = 803;
+  const weather = 800;
   const dayOrNight = response[3];
 
   const moonContainer = document.getElementById("js-moon-container");
   const sunContainer = document.getElementById("js-sun-container");
-  const cloudsContainer = document.getElementById("js-clouds-container");
-  const oneCloudContainer = document.getElementById("js-one-cloud-container");
-  const twoCloudContainer = document.getElementById("js-two-clouds-container"); //TODO: Refacto : est-ce que je peux éviter de définir les variables à chaque fois que la fonction est appelée ? Avec une fonction alternative qui return les variables necessaires seulement pour éviter de réécrire du code ?
+  const cloudsContainer = document.getElementById("js-cloud-container");
   const filterBack = document.getElementById("test");
 
   if (dayOrNight === 'd') {
@@ -34,10 +32,7 @@ async function appendFirstPart() {
   else if (weather === 801) {
     cloudsContainer.classList.add("sun-cloud--one-cloud-subcontainer");
     sunContainer.classList.add("sun-cloud--sun-container");
-    // oneCloudContainer.firstChild.id = "cloud-white-s3";
     filterBack.setAttribute("seed", 3);
-    oneCloudContainer.firstChild.classList.remove("d-none");
-    oneCloudContainer.classList.remove("d-none");
     cloudsContainer.classList.remove("d-none");
     sunContainer.classList.remove("d-none");
   }
@@ -48,12 +43,10 @@ async function appendFirstPart() {
     oneCloudContainer.firstChild.classList.remove("d-none");
   }
   else if (weather === 803) {
+    filterBack.setAttribute("baseFrequency", 0.007);
     cloudsContainer.classList.remove("d-none");
     cloudsContainer.classList.add("two-clouds--clouds-container");
-    // oneCloudContainer.classList.remove("d-none");
-    twoCloudContainer.classList.remove("d-none");
-    filterBack.setAttribute("baseFrequency", 0.014);
-
+    cloudsContainer.firstChild.classList.add("cloud-white--broken");
   }
 }
 

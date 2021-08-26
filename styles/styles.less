@@ -159,6 +159,8 @@ body {
 
   background: radial-gradient(circle at 100% 0%, #adb9d6, #5b74af 40%, #0f172b 90%, black);
   background: radial-gradient(circle at 50% -10%, white , #92f4fd 30%, #3b6db5);
+
+  overflow: hidden;
 }
 
 .second-part {
@@ -274,31 +276,31 @@ body {
     box-shadow: @bs-x @bs-y1 @bs-blur-back @bs-spread-back #fff;
   }
 
-  #one-cloud__cloud-white {
+  #cloud-white {
     filter: url(#filter-back);
   }
 
-  #cloud--mini() {
+  // #cloud--mini() {
 
-    .mini-cloud {
-      // position: relative;
-      // top: -19px;
-      // left: -1px;
+  //   .mini-cloud {
+  //     // position: relative;
+  //     // top: -19px;
+  //     // left: -1px;
 
-      width: 40px;
-      height: 23.5px;
-      background: #000;
-      border-radius: 50%;
-      background-color: rgba(0, 0,0, 0);
-    }
+  //     width: 40px;
+  //     height: 23.5px;
+  //     background: #000;
+  //     border-radius: 50%;
+  //     background-color: rgba(0, 0,0, 0);
+  //   }
 
-    #cloud-white {
-      filter: url(#filter-back);
-      // box-shadow: @bs-x @bs-y1 @bs-blur-back @bs-spread-back #fff;
-      box-shadow: rgb(255, 255, 255) 68px 31.325px 2px -3px;
-      box-shadow: #000 0 31.325px 3px -10px,  0 31.325px 4px -6px #9ea8b3, #fff 0 31.325px 2px -3px;
-    }
-  }
+  //   #cloud-white {
+  //     filter: url(#filter-back);
+  //     // box-shadow: @bs-x @bs-y1 @bs-blur-back @bs-spread-back #fff;
+  //     box-shadow: rgb(255, 255, 255) 68px 31.325px 2px -3px;
+  //     box-shadow: #000 0 31.325px 3px -10px,  0 31.325px 4px -6px #9ea8b3, #fff 0 31.325px 2px -3px;
+  //   }
+  // }
 
   #cloud--black() {
     @bs-y-mid: calc(@bs-y1 + 5px);
@@ -339,15 +341,16 @@ body {
     //Les deux sub-containers doivent avoir une position absolute aussi, sinon on peut pas positionner l'un à gauche et l'autre vers la droite.
 
     .two-clouds--clouds-container {
+      top: -190%;
+      left: -60%;
+
       margin-bottom: -33%;
-      position: relative;
-      top: -45%;
       width: 100%;
     }
 
-    #cloud-white--broken {
-      filter: url(#filter-back);
-      box-shadow: #fff -25px 131.11px 20.9449px -5.96364px, #fff 170px 141.11px 30.9449px 5.96364px, #fff -15px 261.11px 20.9449px -20.96364px, #fff 240px 81.11px 20.9449px -5.96364px , #fff 240px 281.11px 30.9449px -5.96364px;
+    .cloud-white--broken {
+      // box-shadow: #fff -25px 131.11px 20.9449px -5.96364px, #fff 170px 141.11px 30.9449px 5.96364px, #fff -15px 261.11px 20.9449px -20.96364px, #fff 240px 81.11px 20.9449px -5.96364px , #fff 240px 281.11px 30.9449px -5.96364px;
+      box-shadow: #fff -25px 131.11px 20.9449px -5.96364px, #fff 170px 141.11px 30.9449px 5.96364px, #fff -15px 261.11px 20.9449px -20.96364px, #fff -110px 371.11px 20.9449px -25.96364px, #fff -20px 491.11px 30.9449px -5.96364px, #fff 240px 321.11px 30.9449px -5.96364px;
       width: 150px;
       height: 121px;
     }
@@ -363,20 +366,23 @@ body {
 @sun-size: 125px;
 @sun-container-size: calc(@sun-size - 2px);
 
-.moon {
+.celestial-container {
   border-radius: 50%;
-  .wh(@sun-size);
+  .wh(@sun-container-size);
+  overflow: hidden;
+}
 
+.celestial {
+  .wh(@sun-size);
+}
+
+.moon {
   background-color: white;
   filter: url(#filter2);
 }
 
-
 .moon-container {
-  border-radius: 50%;
-  .wh(@sun-container-size);
   box-shadow: 0 0 14px 5px white, 0 0 20px 4px white;
-  overflow: hidden;
 }
 
 .sun {
@@ -384,30 +390,28 @@ body {
   top: -1px;
   left: -1px;
 
-  border-radius: 50%;
-  .wh(@sun-size);
-
   background-color: red;
   filter: url(#filter);
 }
 
 .sun-container {
-  border-radius: 50%;
-  .wh(@sun-container-size);
   box-shadow: 0 0 14px 5px #ff1600, 0 0 20px 4px yellow;
 }
 
 .sun-cloud--sun-container {
   position: relative;
+  top: -50%;
+  left: 75%;
+}
 
-  left: 86px;
-  top: -67px;
-
-  // left: 148px; // Dans le coin
+.cloud-container {
+  position: relative;
 }
 
 .sun-cloud--one-cloud-subcontainer {
+  position: absolute;
   top: -20%;
+  left: 18%;
 }
 
 .one-cloud--clouds-container {
