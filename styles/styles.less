@@ -151,7 +151,9 @@ body {
   align-items: center;
   justify-content: space-around;
 
+  position: relative;
   box-sizing: border-box;
+
   height: @first-part-height;
   padding-bottom: 8.75vh;
 
@@ -228,8 +230,8 @@ body {
   // @cloud-w: 400px;
   // @cloud-h: 220px;
 
-  // @cloud-w: 250px;
-  // @cloud-h: 137px;
+  @cloud-w: 250px;
+  @cloud-h: 137px;
 
   // @cloud-w: 125px;
   // @cloud-h: 68px;
@@ -237,45 +239,48 @@ body {
   // @cloud-w: 50px;
   // @cloud-h: 27.5px;
 
-  // @bs-x: calc(@cloud-w * .02);
-  // @bs-y1: calc(@cloud-h * 1.03);
-  // @bs-blur-back: calc(@cloud-h /  9.167);
-  // @bs-spread-back: calc(-1 * (@cloud-h /  13.75));
+  @bs-x: calc(@cloud-w * .02);
+  @bs-y1: calc(@cloud-h * 1.03);
+  @bs-blur-back: calc(@cloud-h /  9.167);
+  @bs-spread-back: calc(-1 * (@cloud-h /  13.75));
 
-  // @bs-y-mid: calc(@cloud-h * 1.04);
-  // @bs-y-front: calc(@cloud-h * 1.09);
-  // @bs-blur-front: calc(@cloud-h /  3.92857);
-  // @bs-spread-front: calc(-1 * (@cloud-h /  3.4375));
-  // @bs-blur-mid: calc(@cloud-h /  9.167);
-  // @bs-spread-mid: calc(-1 * (@cloud-h /  9.167));
+  @bs-y-mid: calc(@cloud-h * 1.04);
+  @bs-y-front: calc(@cloud-h * 1.09);
+  @bs-blur-front: calc(@cloud-h /  3.92857);
+  @bs-spread-front: calc(-1 * (@cloud-h /  3.4375));
+  @bs-blur-mid: calc(@cloud-h /  9.167);
+  @bs-spread-mid: calc(-1 * (@cloud-h /  9.167));
 
-  // .cloud {
-  //   width: @cloud-w;
-  //   height: @cloud-h;
-  //   // .wh(100%);
-  //   background: #000;
-  //   border-radius: 50%;
-  //   position: absolute;
-  //   top: -100px;
-  //   position: absolute;
-  //   top: 0px;
-  //   left: 0px;
-  //   background-color: rgba(0, 0,0, 0);
-  // }
+  .clouds-container {
+    margin-bottom: 10.1562vh;
+
+    position: relative;
+  }
+
+  .cloud {
+    border-radius: 0%;
+    width: @cloud-w;
+    height: @cloud-h;
+
+    background-color: rgba(0, 0,0, 0);
+  }
 
   // @bs-x: 10px;
   // @bs-y1: calc(@cloud-h + 15px);
   // @bs-blur-back: calc(@cloud-h /  9.167);
   // @bs-spread-back: calc(-1 * (@cloud-h /  13.75));
 
-  // #cloud-back {
-  //   filter: url(#filter-back);
-  //   box-shadow: @bs-x @bs-y1 @bs-blur-back @bs-spread-back #fff;
-  // }
+  .cloud-white {
+    box-shadow: @bs-x @bs-y1 @bs-blur-back @bs-spread-back #fff;
+  }
+
+  #one-cloud__cloud-white {
+    filter: url(#filter-back);
+  }
 
   #cloud--mini() {
 
-    .cloud {
+    .mini-cloud {
       // position: relative;
       // top: -19px;
       // left: -1px;
@@ -287,7 +292,7 @@ body {
       background-color: rgba(0, 0,0, 0);
     }
 
-    #cloud-back {
+    #cloud-white {
       filter: url(#filter-back);
       // box-shadow: @bs-x @bs-y1 @bs-blur-back @bs-spread-back #fff;
       box-shadow: rgb(255, 255, 255) 68px 31.325px 2px -3px;
@@ -305,7 +310,7 @@ body {
 
     #cloud-mid {
       filter: url(#filter-mid);
-      box-shadow: @bs-x @bs-y-mid @bs-blur-mid @bs-spread-mid rgba(158, 168, 179, .4);
+      box-shadow: @bs-x @bs-y-mid @bs-blur-mid @bs-spread-mid rgba(158, 168, 179, .4); //TODO: La shadow grise est décallée vers le bas
     }
 
     #cloud-front {
@@ -321,6 +326,7 @@ body {
     #cloud-mid {
       filter: url(#filter-mid);
       box-shadow: @bs-x @bs-y2 70px -50px rgba(158, 168, 179, .8);
+
     }
 
     #cloud-front {
@@ -329,8 +335,27 @@ body {
     }
   }
 
-  // #cloud--black();
-  #cloud--mini();
+  .two-clouds() {
+    //Les deux sub-containers doivent avoir une position absolute aussi, sinon on peut pas positionner l'un à gauche et l'autre vers la droite.
+
+    .two-clouds--clouds-container {
+      margin-bottom: -33%;
+      position: relative;
+      top: -45%;
+      width: 100%;
+    }
+
+    #cloud-white--broken {
+      filter: url(#filter-back);
+      box-shadow: #fff -25px 131.11px 20.9449px -5.96364px, #fff 170px 141.11px 30.9449px 5.96364px, #fff -15px 261.11px 20.9449px -20.96364px, #fff 240px 81.11px 20.9449px -5.96364px , #fff 240px 281.11px 30.9449px -5.96364px;
+      width: 150px;
+      height: 121px;
+    }
+  }
+
+  .two-clouds();
+
+  // #cloud--mini();
 }
 
 .big-cloud();
@@ -372,6 +397,28 @@ body {
   box-shadow: 0 0 14px 5px #ff1600, 0 0 20px 4px yellow;
 }
 
+.sun-cloud--sun-container {
+  position: relative;
+
+  left: 86px;
+  top: -67px;
+
+  // left: 148px; // Dans le coin
+}
+
+.sun-cloud--one-cloud-subcontainer {
+  top: -20%;
+}
+
+.one-cloud--clouds-container {
+  top: -135px;
+  margin-bottom: 0; //Quand est-ce qu'elle sert cette margin-bottom de 10.1562vh (voir .clouds-container)
+}
+
+
+
+
+
 // .filtered2 {
   // filter: url(#filter2);
 // }
@@ -379,8 +426,6 @@ body {
 .temperature-container {
   display: flex;
   justify-content: center;
-
-  font-size: 2rem;
 }
 
 .temperature-weather {

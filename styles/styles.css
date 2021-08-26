@@ -71,6 +71,7 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: space-around;
+  position: relative;
   box-sizing: border-box;
   height: 68vh;
   padding-bottom: 8.75vh;
@@ -120,17 +121,33 @@ body {
 .weather {
   font-size: 1.8rem;
 }
+.clouds-container {
+  margin-bottom: 10.1562vh;
+  position: relative;
+}
 .cloud {
-  width: 40px;
-  height: 23.5px;
-  background: #000;
-  border-radius: 50%;
+  border-radius: 0%;
+  width: 250px;
+  height: 137px;
   background-color: rgba(0, 0, 0, 0);
 }
-#cloud-back {
+.cloud-white {
+  box-shadow: calc(250px * 0.02) calc(137px * 1.03) calc(137px / 9.167) calc(-1 * (137px / 13.75)) #fff;
+}
+#one-cloud__cloud-white {
   filter: url(#filter-back);
-  box-shadow: #ffffff 68px 31.325px 2px -3px;
-  box-shadow: #000 0 31.325px 3px -10px, 0 31.325px 4px -6px #9ea8b3, #fff 0 31.325px 2px -3px;
+}
+.two-clouds--clouds-container {
+  margin-bottom: -33%;
+  position: relative;
+  top: -45%;
+  width: 100%;
+}
+#cloud-white--broken {
+  filter: url(#filter-back);
+  box-shadow: #fff -25px 131.11px 20.9449px -5.96364px, #fff 170px 141.11px 30.9449px 5.96364px, #fff -15px 261.11px 20.9449px -20.96364px, #fff 240px 81.11px 20.9449px -5.96364px, #fff 240px 281.11px 30.9449px -5.96364px;
+  width: 150px;
+  height: 121px;
 }
 .moon {
   border-radius: 50%;
@@ -162,10 +179,21 @@ body {
   height: calc(125px - 2px);
   box-shadow: 0 0 14px 5px #ff1600, 0 0 20px 4px yellow;
 }
+.sun-cloud--sun-container {
+  position: relative;
+  left: 86px;
+  top: -67px;
+}
+.sun-cloud--one-cloud-subcontainer {
+  top: -20%;
+}
+.one-cloud--clouds-container {
+  top: -135px;
+  margin-bottom: 0;
+}
 .temperature-container {
   display: flex;
   justify-content: center;
-  font-size: 2rem;
 }
 .temperature-weather {
   display: inline-block;
