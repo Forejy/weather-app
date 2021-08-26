@@ -8,27 +8,24 @@ html(lang="en")
   body
     section.first-part
       section.weather-container
-        section#js-moon-container.celestial-container.moon-container.d-none
-          div.celestial.moon
+        section#js-celestial-container.celestial-container.d-none
+          div.celestial
           svg(width="0" height="0")
-            filter(id="filter2")
-              feTurbulence(type="fractalNoise" result="myTurbulence" baseFrequency=".009" numOctaves="7" seed="2")
-              feComposite(operator="in" in="myTurbulence" in2="SourceAlpha" result="myComposite")
-              feColorMatrix(in="myComposite" type="matrix" values="1   0   1   0  0 1   0   1   0  0  1   0   1   0  0  -.5   .4   -.2   .9 0")
-        section#js-sun-container.celestial-container.sun-container.d-none
-          div.celestial.sun
-          svg(width="0" height="0")
-            filter(id="filter")
+            filter(id="sun")
               feTurbulence(type="fractalNoise" result="myTurbulence" baseFrequency=".2" numOctaves="5" seed="2")
               feComposite(operator="in" in="myTurbulence" in2="SourceAlpha" result="myComposite")
               feColorMatrix(in="myComposite" type="matrix" values="0   0   0   1   1 0   0   0   .25   0 0   0   0   0   0 0   0   0   100  0")
+            filter(id="moon")
+              feTurbulence(type="fractalNoise" result="myTurbulence" baseFrequency=".009" numOctaves="7" seed="2")
+              feComposite(operator="in" in="myTurbulence" in2="SourceAlpha" result="myComposite")
+              feColorMatrix(in="myComposite" type="matrix" values="1   0   1   0  0 1   0   1   0  0  1   0   1   0  0  -.5   .4   -.2   .9 0")
         section#js-cloud-container.cloud-container.d-none
           div.cloud.cloud-white#cloud-white
           div.cloud#one-cloud__cloud-mid.d-none
           div.cloud#one-cloud__cloud-front.d-none
           <svg width="0" height="0">
-            <filter id="filter-back">
-              <feTurbulence id="test" type="fractalNoise" baseFrequency="0.008" numOctaves="7" seed="4"/>
+            <filter id="filter-white">
+              <feTurbulence id="filter-white__turbulence" type="fractalNoise" baseFrequency="0.008" numOctaves="7" seed="4"/>
               <feDisplacementMap  in="SourceGraphic" scale="175" />
             </filter>
             <filter id="filter-mid-s3">
@@ -57,88 +54,13 @@ html(lang="en")
             section#js-day-temperatures__temperatures
             section.day-temperatures__hours#js-hours
           section.week.ff--JSR#js-week
-      section.day-week
-        section.switch-container
+      section.switch-container
+        section.switch-subcontainer
           section.switch-subcontainer#js-switch-subcontainer
             div.switch.switch-lpart
             div.switch.switch-rpart
-        section.day-week__text
-          span.day-week__text__words.text-white DAY
+        section.switch__text.ff--BGL
+          span.js-day-week__text__words.text-white DAY
           span  /
-          span.day-week__text__words  WEEK
-
-
-
-    //- section.second-part
-    //- section
-    //-   div.cloud-square
-    //-   <svg width="0" height="0">
-    //-     <filter id="filter">
-    //-       <feTurbulence type="fractalNoise" baseFrequency=".01" numOctaves="10" />
-    //-       <feDisplacementMap in="SourceGraphic" scale="90" />
-    //-     </filter>
-    //-   </svg>
-    //- section
-    //-   div.cloud-circle
-    //-     <svg width="0" height="0">
-    //-       <filter id="filter">
-    //-         <feTurbulence type="fractalNoise" baseFrequency=".01" numOctaves="10" />
-    //-         <feDisplacementMap in="SourceGraphic" scale="180" />
-    //-       </filter>
-    //-     </svg>
-
-
+          span.js-day-week__text__words  WEEK
     script(type="text/javascript" src="scripts/index.js")
-
-
-    //-  <svg width="0" height="0">
-    //-     <defs>
-    //-       <filter id="filter">
-    //-         <feTurbulence type="fractalNoise" result="myTurbulence" baseFrequency=".1" numOctaves="10" seed="10" />
-    //-         <feComposite operator="in" in="myTurbulence" in2="SourceAlpha" result="myComposite"/>
-    //-         <feColorMatrix in="myComposite" type="matrix"
-    //-           values="1   0   0   1   2
-    //-                   0   0   0   .3   0
-    //-                   0   0   0   0   0
-    //-                   0   0   0   100  0" />
-    //-       </filter>
-    //-     </defs>
-    //- </svg>
-    //- <div  class="filtered">
-    //-   <p>Some Text</p>
-    //-   <svg>
-    //-     <rect x="10" y="10" width="300" height="100" />
-    //-   </svg>
-    //- </div>
-    //-   <svg xmlns="http://www.w3.org/2000/svg">
-    //-     <filter id="filter">
-    //-         <feTurbulence type="fractalNoise" baseFrequency="0.1" numOctaves="5"/>
-    //-     </filter>
-    //-     <rect width="100px" height="100px" filter="url(#filter)"/>
-    //-   </svg>
-
-
-  //-   <div class="container">
-  //-   <div  class="filtered"></div>
-  //-   <svg>
-  //-     <defs>
-  //-       <filter id="filter">
-  //-         <feTurbulence type="fractalNoise" result="myTurbulence" baseFrequency=".2" numOctaves="5" seed="2" />
-  //-         <feComposite operator="in" in="myTurbulence" in2="SourceAlpha" result="myComposite"/>
-  //-         <feColorMatrix in="myComposite" type="matrix"
-  //-           values="0   0   0   1   1
-  //-                   0   0   0   .3   0
-  //-                   0   0   0   0   0
-  //-                   0   0   0   100  0" />
-  //-       </filter>
-  //-     </defs>
-  //-   </svg>
-  //- </div>
-
-  //- div#js-one-cloud-container
-  //-       svg(width="0" height="0")
-  //-         filter(id="filter--grayscale")
-  //-           feTurbulence(type="fractalNoise" result="myTurbulence2" baseFrequency=".2" numOctaves="5" seed="2")
-  //-       svg
-  //-         filter(id="filter--grayscale")
-  //-           feTurbulence(type="fractalNoise" result="myTurbulence2" baseFrequency=".2" numOctaves="5" seed="2")
